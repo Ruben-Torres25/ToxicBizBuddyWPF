@@ -4,10 +4,7 @@ namespace ToxicBizBuddyWPF.Components
 {
     public partial class PageHeader : UserControl
     {
-        public PageHeader()
-        {
-            InitializeComponent();
-        }
+        public PageHeader() => InitializeComponent();
 
         public string Title
         {

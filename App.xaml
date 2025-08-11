@@ -3,40 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <!-- Importá primero tus diccionarios -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-        <!-- Estilo para los botones del menú lateral -->
-        <Style x:Key="SidebarButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#1F2937"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="Margin" Value="0,5,0,0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
-                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#E0F2FE"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+            <!-- Luego, tus recursos locales (todos con x:Key) -->
 
-        <!-- Estilo de sombra tipo 'shadcn card' -->
-        <DropShadowEffect x:Key="ShadowEffect"
-                  BlurRadius="10"
-                  ShadowDepth="2"
-                  Direction="270"
-                  Color="#000000"
-                  Opacity="0.1"/>
+            <!-- Estilo para los botones del menú lateral -->
+            <Style x:Key="SidebarButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="#1F2937"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Margin" Value="0,5,0,0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                                <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#E0F2FE"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
-
+            <!-- Sombra tipo 'card' -->
+            <DropShadowEffect x:Key="ShadowEffect"
+                        BlurRadius="10"
+                        ShadowDepth="2"
+                        Direction="270"
+                        Color="#000000"
+                        Opacity="0.1"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

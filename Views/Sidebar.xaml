@@ -11,18 +11,31 @@
                 </StackPanel>
             </Border>
 
+            <!-- Botonera del sidebar -->
             <StackPanel Margin="10">
-                <Button Content="Dashboard" Style="{StaticResource SidebarButtonStyle}" Click="Dashboard_Click"/>
-                <Button Content="Inicio" Style="{StaticResource SidebarButtonStyle}" Click="Index_Click"/>
-                <Button Content="Productos"
-        Style="{StaticResource SidebarButtonStyle}"
-        Click="Products_Click"/>
-                <Button Content="Clientes"
-        Style="{StaticResource SidebarButtonStyle}"
-        Click="Clients_Click"/>
+                <!-- Activo por Tag="active" -->
+                <Button Style="{StaticResource SidebarButtonStyle}" Click="Dashboard_Click" Tag="active">
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,8,0"/>
+                        <TextBlock Text="Dashboard"/>
+                    </StackPanel>
+                </Button>
 
+                <Button Style="{StaticResource SidebarButtonStyle}" Click="Products_Click">
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,8,0"/>
+                        <TextBlock Text="Productos"/>
+                    </StackPanel>
+                </Button>
 
+                <Button Style="{StaticResource SidebarButtonStyle}" Click="Clients_Click">
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,8,0"/>
+                        <TextBlock Text="Clientes"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
+
         </StackPanel>
     </Border>
 </UserControl>

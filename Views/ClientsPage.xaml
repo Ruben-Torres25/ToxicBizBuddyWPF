@@ -7,33 +7,32 @@
     <components:PageWrapper>
         <StackPanel>
 
-            <!-- Título -->
-            <components:PageHeader Title="Clientes" Subtitle="Lista de clientes registrados"/>
+            <TextBlock Text="Clientes" Style="{StaticResource H1}"/>
+            <TextBlock Text="Lista de clientes registrados"
+                 Style="{StaticResource Subtle}" Margin="0,4,0,16"/>
 
-            <!-- Botón Agregar -->
-            <components:PrimaryButton Text="Agregar cliente"/>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <Button Style="{StaticResource BtnPrimary}" Content="+ Agregar cliente"/>
+                <Button Style="{StaticResource BtnGhost}" Content="Importar" Margin="12,0,0,0"/>
+                <ContentControl Style="{StaticResource Badge}" Margin="12,0,0,0" Content="Total: 0"/>
+            </StackPanel>
 
-            <!-- Tabla en card -->
-            <components:Card>
+            <Border Style="{StaticResource CardStyle}">
                 <DataGrid AutoGenerateColumns="False"
-                          CanUserAddRows="False"
-                          HeadersVisibility="Column"
-                          RowHeight="36"
-                          ColumnHeaderHeight="36"
-                          FontSize="14"
-                          BorderThickness="0"
-                          Background="White"
-                          GridLinesVisibility="None"
-                          AlternatingRowBackground="#F1F5F9"
-                          Padding="4">
+                  CanUserAddRows="False"
+                  HeadersVisibility="Column"
+                  Padding="4"
+                  Style="{StaticResource DataGridBase}"
+                  ColumnHeaderStyle="{StaticResource DataGridHeader}"
+                  RowStyle="{StaticResource DataGridRowStyle}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
-                        <DataGridTextColumn Header="DNI" Binding="{Binding DNI}" Width="150" />
-                        <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="150" />
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+                        <DataGridTextColumn Header="Nombre"   Binding="{Binding Nombre}"   Width="*"/>
+                        <DataGridTextColumn Header="DNI"      Binding="{Binding DNI}"      Width="150"/>
+                        <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="150"/>
+                        <DataGridTextColumn Header="Email"    Binding="{Binding Email}"    Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-            </components:Card>
+            </Border>
 
         </StackPanel>
     </components:PageWrapper>

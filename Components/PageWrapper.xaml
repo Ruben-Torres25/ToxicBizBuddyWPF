@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Border Background="#F8FAFC" Padding="32">
-        <!-- tailwind slate-50 -->
         <ContentPresenter/>
     </Border>
 </UserControl>

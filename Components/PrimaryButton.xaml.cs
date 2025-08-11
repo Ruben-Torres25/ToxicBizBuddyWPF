@@ -5,20 +5,18 @@ namespace ToxicBizBuddyWPF.Components
 {
     public partial class PrimaryButton : UserControl
     {
-        public PrimaryButton()
-        {
-            InitializeComponent();
-        }
+        public PrimaryButton() => InitializeComponent();
 
         public string Text
         {
-            get => InnerButton.Content.ToString();
-            set => InnerButton.Content = value;
+            get => (string)((ContentPresenter)InnerButton.Content).Content;
+            set => ((ContentPresenter)InnerButton.Content).Content = value;
         }
 
-        public RoutedEventHandler OnClick
+        public event RoutedEventHandler Click
         {
-            set => InnerButton.Click += value;
+            add { InnerButton.Click += value; }
+            remove { InnerButton.Click -= value; }
         }
     }
 }

@@ -4,9 +4,6 @@ namespace ToxicBizBuddyWPF.Components
 {
     public partial class Card : UserControl
     {
-        public Card()
-        {
-            InitializeComponent();
-        }
+        public Card() => InitializeComponent();
     }
 }
