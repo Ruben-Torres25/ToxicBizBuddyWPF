@@ -8,6 +8,7 @@ namespace ToxicBizBuddyWPF
         {
             InitializeComponent();
             MainFrame.Navigate(new Views.DashboardPage());
+
         }
     }
 }
