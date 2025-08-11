@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="ToxicBizBuddyWPF.Views.Sidebar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="Auto" Width="250" Background="#FFFFFF">
+    <Border BorderBrush="#E5E7EB" BorderThickness="1" Background="#FFFFFF">
+        <StackPanel>
+            <Border BorderBrush="#E5E7EB" BorderThickness="0,0,0,1">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Toxic Business" FontSize="24" FontWeight="Bold" Foreground="Black"/>
+                    <TextBlock Text="Sistema de Gestión" FontSize="12" Foreground="#6B7280" Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <StackPanel Margin="10">
+                <Button Content="Dashboard" Style="{StaticResource SidebarButtonStyle}" Click="Dashboard_Click"/>
+                <Button Content="Inicio" Style="{StaticResource SidebarButtonStyle}" Click="Index_Click"/>
+                <Button Content="Productos"
+        Style="{StaticResource SidebarButtonStyle}"
+        Click="Products_Click"/>
+                <Button Content="Clientes"
+        Style="{StaticResource SidebarButtonStyle}"
+        Click="Clients_Click"/>
+
+
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>
