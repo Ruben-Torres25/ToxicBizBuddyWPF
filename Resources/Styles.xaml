@@ -227,5 +227,35 @@
     <Style x:Key="KpiOnGradientDelta" TargetType="TextBlock" BasedOn="{StaticResource KpiDeltaPositive}">
         <Setter Property="Foreground" Value="#FFFFFFCC"/>
     </Style>
+    <!-- ===== Inputs (TextBox) con borde redondeado, foco y padding ===== -->
+    <Style x:Key="InputText" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Slate200Brush}"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="Bd"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="8">
+                        <ScrollViewer x:Name="PART_ContentHost" Margin="0"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.6"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
 </ResourceDictionary>

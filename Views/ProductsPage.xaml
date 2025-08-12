@@ -2,22 +2,89 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components"
-
       Title="ProductsPage">
 
     <components:PageWrapper>
         <StackPanel>
 
+            <!-- Header -->
             <TextBlock Text="Productos" Style="{StaticResource H1}"/>
             <TextBlock Text="Listado actualizado de productos disponibles"
                  Style="{StaticResource Subtle}" Margin="0,4,0,16"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                <Button Style="{StaticResource BtnPrimary}" Content="+ Agregar producto"/>
-                <Button Style="{StaticResource BtnGhost}" Content="Exportar" Margin="12,0,0,0"/>
-                <ContentControl Style="{StaticResource Badge}" Margin="12,0,0,0" Content="Activos: 128"/>
-            </StackPanel>
+            <!-- Toolbar: Search + Filtros + Acciones -->
+            <WrapPanel ItemHeight="40" ItemWidth="240" Margin="0,0,0,12">
 
+                <!-- Search (sin PlaceholderText) -->
+                <Border Background="White"
+                BorderBrush="{StaticResource Slate200Brush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="8"
+                Width="320"
+                Margin="0,0,12,12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBox Grid.Column="1"
+                     Style="{StaticResource InputText}"
+                     BorderThickness="0"
+                     Background="Transparent"
+                     Padding="0"
+                     ToolTip="Buscar productos"/>
+                    </Grid>
+                </Border>
+
+                <!-- Filtro: Categoría -->
+                <Border Background="White"
+                BorderBrush="{StaticResource Slate200Brush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="4"
+                Width="220"
+                Margin="0,0,12,12">
+                    <ComboBox BorderThickness="0"
+                    Background="Transparent"
+                    Padding="4,2"
+                    ToolTip="Categoría">
+                        <ComboBoxItem Content="Todas"/>
+                        <ComboBoxItem Content="Líquidos"/>
+                        <ComboBoxItem Content="Polvos"/>
+                        <ComboBoxItem Content="Desinfectantes"/>
+                    </ComboBox>
+                </Border>
+
+                <!-- Filtro: Estado -->
+                <Border Background="White"
+                BorderBrush="{StaticResource Slate200Brush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="4"
+                Width="220"
+                Margin="0,0,12,12">
+                    <ComboBox BorderThickness="0"
+                    Background="Transparent"
+                    Padding="4,2"
+                    ToolTip="Estado">
+                        <ComboBoxItem Content="Todos"/>
+                        <ComboBoxItem Content="Activo"/>
+                        <ComboBoxItem Content="Inactivo"/>
+                        <ComboBoxItem Content="Stock bajo"/>
+                    </ComboBox>
+                </Border>
+
+                <!-- Acciones -->
+                <Button Style="{StaticResource BtnPrimary}" Content="+ Agregar producto" Margin="0,0,12,12"/>
+                <Button Style="{StaticResource BtnGhost}" Content="Exportar" Margin="0,0,12,12"/>
+
+                <!-- Badge contador -->
+                <ContentControl Style="{StaticResource Badge}" Content="Activos: 128" Margin="0,0,12,12"/>
+            </WrapPanel>
+
+            <!-- Card + Tabla -->
             <Border Style="{StaticResource CardStyle}">
                 <DataGrid AutoGenerateColumns="False"
                   CanUserAddRows="False"

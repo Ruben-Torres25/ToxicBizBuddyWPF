@@ -11,12 +11,78 @@
             <TextBlock Text="Lista de clientes registrados"
                  Style="{StaticResource Subtle}" Margin="0,4,0,16"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                <Button Style="{StaticResource BtnPrimary}" Content="+ Agregar cliente"/>
-                <Button Style="{StaticResource BtnGhost}" Content="Importar" Margin="12,0,0,0"/>
-                <ContentControl Style="{StaticResource Badge}" Margin="12,0,0,0" Content="Total: 0"/>
-            </StackPanel>
+            <!-- Toolbar -->
+            <WrapPanel ItemHeight="40" ItemWidth="240" Margin="0,0,0,12">
 
+                <!-- Search -->
+                <Border Background="White"
+                BorderBrush="{StaticResource Slate200Brush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="8"
+                Width="320"
+                Margin="0,0,12,12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBox Grid.Column="1"
+                     Style="{StaticResource InputText}"
+                     BorderThickness="0"
+                     Background="Transparent"
+                     Padding="0"
+                     ToolTip="Buscar clientes"/>
+                    </Grid>
+                </Border>
+
+                <!-- Filtro: Estado -->
+                <Border Background="White"
+                BorderBrush="{StaticResource Slate200Brush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="4"
+                Width="220"
+                Margin="0,0,12,12">
+                    <ComboBox BorderThickness="0"
+                    Background="Transparent"
+                    Padding="4,2"
+                    ToolTip="Estado">
+                        <ComboBoxItem Content="Todos"/>
+                        <ComboBoxItem Content="Activo"/>
+                        <ComboBoxItem Content="Inactivo"/>
+                    </ComboBox>
+                </Border>
+
+                <!-- Filtro: Ordenar por -->
+                <Border Background="White"
+                BorderBrush="{StaticResource Slate200Brush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="4"
+                Width="220"
+                Margin="0,0,12,12">
+                    <ComboBox BorderThickness="0"
+                    Background="Transparent"
+                    Padding="4,2"
+                    ToolTip="Ordenar por">
+                        <ComboBoxItem Content="Nombre (A-Z)"/>
+                        <ComboBoxItem Content="Nombre (Z-A)"/>
+                        <ComboBoxItem Content="Creación (recientes)"/>
+                        <ComboBoxItem Content="Creación (antiguos)"/>
+                    </ComboBox>
+                </Border>
+
+                <!-- Acciones -->
+                <Button Style="{StaticResource BtnPrimary}" Content="+ Agregar cliente" Margin="0,0,12,12"/>
+                <Button Style="{StaticResource BtnGhost}" Content="Importar" Margin="0,0,12,12"/>
+
+                <!-- Badge -->
+                <ContentControl Style="{StaticResource Badge}" Content="Total: 0" Margin="0,0,12,12"/>
+            </WrapPanel>
+
+            <!-- Card + Tabla -->
             <Border Style="{StaticResource CardStyle}">
                 <DataGrid AutoGenerateColumns="False"
                   CanUserAddRows="False"
