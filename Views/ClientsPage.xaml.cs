@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using ToxicBizBuddyWPF.Views.Dialogs;
 
 namespace ToxicBizBuddyWPF.Views
 {
@@ -7,7 +9,15 @@ namespace ToxicBizBuddyWPF.Views
         public ClientsPage()
         {
             InitializeComponent();
-            // No hay DataContext por ahora
+        }
+
+        private void AddClient_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new AddClientDialog
+            {
+                Owner = Application.Current.MainWindow
+            };
+            dlg.ShowDialog(); // solo visual
         }
     }
 }
