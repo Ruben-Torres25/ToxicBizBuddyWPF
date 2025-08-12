@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="ToxicBizBuddyWPF.Components.TopBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="56" Background="#FFFFFF">
+    <Border Background="#FFFFFF" BorderBrush="#E5E7EB" BorderThickness="0,0,0,1">
+        <Grid Margin="16,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Izquierda: buscador -->
+            <Border Background="White"
+              BorderBrush="{StaticResource Slate200Brush}"
+              BorderThickness="1"
+              CornerRadius="8"
+              Padding="8,6"
+              Width="380">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <TextBox Grid.Column="1"
+                   Style="{StaticResource InputText}"
+                   BorderThickness="0" Background="Transparent" Padding="0"
+                   ToolTip="Buscar en el sistema"/>
+                </Grid>
+            </Border>
+
+            <!-- Derecha: acciones + avatar -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Style="{StaticResource BtnGhost}" Content="Atajos" Margin="12,0,0,0"/>
+                <Button Style="{StaticResource BtnPrimary}" Content="+ Nuevo" Margin="12,0,0,0"/>
+
+                <Separator Margin="16,0" Width="1" VerticalAlignment="Stretch" Background="{StaticResource Slate200Brush}"/>
+
+                <!-- Avatar simple -->
+                <Border Width="32" Height="32" CornerRadius="16" Background="#E5E7EB" Margin="0,0,0,0">
+                    <Viewbox Stretch="Uniform">
+                        <TextBlock Text="👤" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Viewbox>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

@@ -8,32 +8,45 @@ namespace ToxicBizBuddyWPF.Views
         public Sidebar()
         {
             InitializeComponent();
+            // Activo inicial
+            SetActive(BtnDashboard);
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow?.MainFrame.Navigate(new DashboardPage());
-        }
-
-        private void Index_Click(object sender, RoutedEventArgs e)
-        {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow?.MainFrame.Navigate(new IndexPage());
+            Navigate("Dashboard");
+            SetActive(BtnDashboard);
         }
 
         private void Products_Click(object sender, RoutedEventArgs e)
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow?.MainFrame.Navigate(new ProductsPage());
+            Navigate("Productos");
+            SetActive(BtnProductos);
         }
 
         private void Clients_Click(object sender, RoutedEventArgs e)
         {
-            var mainWindow = Application.Current.MainWindow as MainWindow;
-            mainWindow?.MainFrame.Navigate(new ClientsPage());
+            Navigate("Clientes");
+            SetActive(BtnClientes);
         }
 
+        private void Navigate(string target)
+        {
+            if (Window.GetWindow(this) is MainWindow win)
+            {
+                win.NavigateTo(target);
+            }
+        }
 
+        private void SetActive(params Button[] active)
+        {
+            // limpiar
+            BtnDashboard.Tag = null;
+            BtnProductos.Tag = null;
+            BtnClientes.Tag = null;
+
+            foreach (var b in active)
+                b.Tag = "active";
+        }
     }
 }

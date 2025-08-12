@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="ToxicBizBuddyWPF.Components.EmptyState"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Style="{StaticResource CardStyle}" Padding="40" HorizontalAlignment="Stretch">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="(●’◡’●)" FontSize="28" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TitleText" Text="Sin datos aún" Style="{StaticResource H1}" FontSize="18" Margin="0,8,0,4" TextAlignment="Center"/>
+            <TextBlock x:Name="SubtitleText" Text="Cuando agregues elementos, aparecerán aquí."
+                 Style="{StaticResource Subtle}" TextAlignment="Center"/>
+            <Button x:Name="PrimaryAction" Content="Agregar nuevo" Style="{StaticResource BtnPrimary}" Margin="0,16,0,0" Width="160"/>
+        </StackPanel>
+    </Border>
+</UserControl>

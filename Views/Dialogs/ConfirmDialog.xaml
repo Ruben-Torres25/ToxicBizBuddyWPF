@@ -1,0 +1,47 @@
+﻿<Window x:Class="ToxicBizBuddyWPF.Views.Dialogs.ConfirmDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Confirmar"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterOwner"
+        WindowState="Maximized"
+        ShowInTaskbar="False"
+        Topmost="True">
+    <Grid Background="#80000000">
+        <Border Style="{StaticResource CardStyle}" Width="440" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <!-- Header -->
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="¿Eliminar elemento?" Style="{StaticResource H1}" FontSize="20" VerticalAlignment="Center"/>
+                    <Button Grid.Column="1"
+                  Content="✕"
+                  Width="34" Height="34"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  Cursor="Hand"
+                  HorizontalAlignment="Right"
+                  Click="Close_Click"/>
+                </Grid>
+
+                <!-- Mensaje -->
+                <TextBlock Text="Esta acción no se puede deshacer."
+                   Style="{StaticResource Subtle}" Margin="0,0,0,8"/>
+                <TextBlock Text="Se eliminará el registro seleccionado."
+                   Style="{StaticResource Subtle}" />
+
+                <!-- Footer -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+                    <Button Content="Cancelar" Style="{StaticResource BtnGhost}" Click="Cancel_Click"/>
+                    <Button Content="Eliminar" Style="{StaticResource BtnDestructive}" Margin="12,0,0,0" Click="Confirm_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

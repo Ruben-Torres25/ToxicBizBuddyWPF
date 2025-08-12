@@ -7,8 +7,7 @@
         <StackPanel>
 
             <TextBlock Text="Clientes" Style="{StaticResource H1}"/>
-            <TextBlock Text="Lista de clientes registrados"
-                 Style="{StaticResource Subtle}" Margin="0,4,0,16"/>
+            <TextBlock Text="Lista de clientes registrados" Style="{StaticResource Subtle}" Margin="0,4,0,16"/>
 
             <WrapPanel ItemHeight="40" ItemWidth="240" Margin="0,0,0,12">
 
@@ -25,22 +24,22 @@
                 </Border>
 
                 <!-- Filtros -->
-                <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="4" Width="220" Margin="0,0,12,12">
-                    <ComboBox BorderThickness="0" Background="Transparent" Padding="4,2" ToolTip="Estado">
-                        <ComboBoxItem Content="Todos"/>
-                        <ComboBoxItem Content="Activo"/>
-                        <ComboBoxItem Content="Inactivo"/>
-                    </ComboBox>
-                </Border>
+                <ComboBox Style="{StaticResource InputCombo}" Width="220" Margin="0,0,12,12">
+                    <ComboBoxItem Content="Estado: Todos" IsSelected="True"/>
+                    <ComboBoxItem Content="Activo"/>
+                    <ComboBoxItem Content="Inactivo"/>
+                </ComboBox>
 
-                <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="4" Width="220" Margin="0,0,12,12">
-                    <ComboBox BorderThickness="0" Background="Transparent" Padding="4,2" ToolTip="Ordenar por">
-                        <ComboBoxItem Content="Nombre (A-Z)"/>
-                        <ComboBoxItem Content="Nombre (Z-A)"/>
-                        <ComboBoxItem Content="Creación (recientes)"/>
-                        <ComboBoxItem Content="Creación (antiguos)"/>
-                    </ComboBox>
-                </Border>
+                <ComboBox Style="{StaticResource InputCombo}" Width="220" Margin="0,0,12,12">
+                    <ComboBoxItem Content="Ordenar: Nombre (A-Z)" IsSelected="True"/>
+                    <ComboBoxItem Content="Nombre (Z-A)"/>
+                    <ComboBoxItem Content="Creación (recientes)"/>
+                    <ComboBoxItem Content="Creación (antiguos)"/>
+                </ComboBox>
+
+                <!-- Chips -->
+                <ToggleButton Style="{StaticResource FilterPill}" Content="Con deuda" Margin="0,0,12,12"/>
+                <ToggleButton Style="{StaticResource FilterPill}" Content="Con descuento" Margin="0,0,12,12"/>
 
                 <!-- Acciones -->
                 <Button Style="{StaticResource BtnPrimary}" Content="+ Agregar cliente" Margin="0,0,12,12" Click="AddClient_Click"/>
@@ -53,15 +52,39 @@
             <!-- Tabla -->
             <Border Style="{StaticResource CardStyle}">
                 <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" HeadersVisibility="Column" Padding="4"
-                  Style="{StaticResource DataGridBase}" ColumnHeaderStyle="{StaticResource DataGridHeader}" RowStyle="{StaticResource DataGridRowStyle}">
+          Style="{StaticResource DataGridBase}" ColumnHeaderStyle="{StaticResource DataGridHeader}" RowStyle="{StaticResource DataGridRowStyle}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nombre"   Binding="{Binding Nombre}"   Width="*"/>
                         <DataGridTextColumn Header="DNI"      Binding="{Binding DNI}"      Width="150"/>
                         <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="150"/>
                         <DataGridTextColumn Header="Email"    Binding="{Binding Email}"    Width="*"/>
+
+                        <!-- Acciones -->
+                        <DataGridTemplateColumn Header="Acciones" Width="160">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Editar" Margin="0,0,6,0">
+                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
+                                        </Button>
+                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Eliminar" Click="DeleteClient_Click">
+                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+
             </Border>
+
+            <!-- Footer de tabla -->
+            <components:Pagination/>
+
+            <!-- Empty state (dejar comentado; visible si no hay datos)
+      <components:EmptyState/>
+      -->
 
         </StackPanel>
     </components:PageWrapper>

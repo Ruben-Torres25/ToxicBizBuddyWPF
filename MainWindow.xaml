@@ -3,16 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:ToxicBizBuddyWPF.Views"
         xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components"
-        Title="Toxic Business" Height="720" Width="1280">
-
+        Title="Toxic Business" Height="720" Width="1280"
+        Background="#FFFFFF">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- TopBar -->
+            <RowDefinition Height="*"/>
+            <!-- Contenido -->
+        </Grid.RowDefinitions>
 
-        <views:Sidebar Grid.Column="0"/>
-        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        <!-- Sidebar ocupa ambas filas -->
+        <views:Sidebar Grid.Column="0" Grid.RowSpan="2"/>
 
+        <!-- TopBar -->
+        <components:TopBar Grid.Column="1" Grid.Row="0"/>
+
+        <!-- Contenido -->
+        <Frame x:Name="MainFrame"
+           Grid.Column="1" Grid.Row="1"
+           NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

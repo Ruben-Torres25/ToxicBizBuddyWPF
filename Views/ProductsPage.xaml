@@ -7,11 +7,10 @@
         <StackPanel>
 
             <TextBlock Text="Productos" Style="{StaticResource H1}"/>
-            <TextBlock Text="Listado actualizado de productos disponibles"
-                 Style="{StaticResource Subtle}" Margin="0,4,0,16"/>
+            <TextBlock Text="Listado actualizado de productos disponibles" Style="{StaticResource Subtle}" Margin="0,4,0,16"/>
 
+            <!-- Toolbar -->
             <WrapPanel ItemHeight="40" ItemWidth="240" Margin="0,0,0,12">
-
                 <!-- Search -->
                 <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="8" Width="320" Margin="0,0,12,12">
                     <Grid>
@@ -25,23 +24,23 @@
                 </Border>
 
                 <!-- Filtros -->
-                <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="4" Width="220" Margin="0,0,12,12">
-                    <ComboBox BorderThickness="0" Background="Transparent" Padding="4,2" ToolTip="Categoría">
-                        <ComboBoxItem Content="Todas"/>
-                        <ComboBoxItem Content="Líquidos"/>
-                        <ComboBoxItem Content="Polvos"/>
-                        <ComboBoxItem Content="Desinfectantes"/>
-                    </ComboBox>
-                </Border>
+                <ComboBox Style="{StaticResource InputCombo}" Width="220" Margin="0,0,12,12">
+                    <ComboBoxItem Content="Categoría: Todas" IsSelected="True"/>
+                    <ComboBoxItem Content="Líquidos"/>
+                    <ComboBoxItem Content="Polvos"/>
+                    <ComboBoxItem Content="Desinfectantes"/>
+                </ComboBox>
 
-                <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="4" Width="220" Margin="0,0,12,12">
-                    <ComboBox BorderThickness="0" Background="Transparent" Padding="4,2" ToolTip="Estado">
-                        <ComboBoxItem Content="Todos"/>
-                        <ComboBoxItem Content="Activo"/>
-                        <ComboBoxItem Content="Inactivo"/>
-                        <ComboBoxItem Content="Stock bajo"/>
-                    </ComboBox>
-                </Border>
+                <ComboBox Style="{StaticResource InputCombo}" Width="220" Margin="0,0,12,12">
+                    <ComboBoxItem Content="Estado: Todos" IsSelected="True"/>
+                    <ComboBoxItem Content="Activo"/>
+                    <ComboBoxItem Content="Inactivo"/>
+                    <ComboBoxItem Content="Stock bajo"/>
+                </ComboBox>
+
+                <!-- Chips -->
+                <ToggleButton Style="{StaticResource FilterPill}" Content="Con stock" Margin="0,0,12,12"/>
+                <ToggleButton Style="{StaticResource FilterPill}" Content="Ofertas" Margin="0,0,12,12"/>
 
                 <!-- Acciones -->
                 <Button Style="{StaticResource BtnPrimary}" Content="+ Agregar producto" Margin="0,0,12,12" Click="AddProduct_Click"/>
@@ -54,15 +53,39 @@
             <!-- Tabla -->
             <Border Style="{StaticResource CardStyle}">
                 <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" HeadersVisibility="Column" Padding="4"
-                  Style="{StaticResource DataGridBase}" ColumnHeaderStyle="{StaticResource DataGridHeader}" RowStyle="{StaticResource DataGridRowStyle}">
+          Style="{StaticResource DataGridBase}" ColumnHeaderStyle="{StaticResource DataGridHeader}" RowStyle="{StaticResource DataGridRowStyle}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Nombre"    Binding="{Binding Nombre}"    Width="*"/>
                         <DataGridTextColumn Header="Stock"     Binding="{Binding Stock}"     Width="100"/>
                         <DataGridTextColumn Header="Precio"    Binding="{Binding Precio}"    Width="100"/>
                         <DataGridTextColumn Header="Categoría" Binding="{Binding Categoria}" Width="*"/>
+
+                        <!-- Acciones -->
+                        <DataGridTemplateColumn Header="Acciones" Width="160">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Editar" Margin="0,0,6,0">
+                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
+                                        </Button>
+                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Eliminar" Click="DeleteProduct_Click">
+                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+
             </Border>
+
+            <!-- Footer de tabla -->
+            <components:Pagination/>
+
+            <!-- Empty state (dejar comentado; visible si no hay datos)
+      <components:EmptyState/>
+      -->
 
         </StackPanel>
     </components:PageWrapper>
