@@ -7,7 +7,7 @@
         <!-- margen interno para que nada quede pegado a los bordes -->
         <StackPanel Margin="20">
 
-            <!-- Header con botón “+ Nuevo” -->
+            <!-- Header con botón “Nuevo Pedido” -->
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -19,24 +19,21 @@
                     <TextBlock Text="Resumen general del negocio" Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
                 </StackPanel>
 
-                <Button Grid.Column="1" Style="{StaticResource BtnPrimary}"
-                Padding="14,8">
+                <Button Grid.Column="1" Style="{StaticResource BtnPrimary}" Padding="14,8">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
-                        <TextBlock Text="+ Nuevo"/>
+                        <TextBlock Text="Nuevo Pedido"/>
                     </StackPanel>
                 </Button>
             </Grid>
 
-            <!-- Fila de KPIs + CTA azul a la derecha -->
+            <!-- Fila de KPIs (4 columnas, sin CTA a la derecha) -->
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="280"/>
-                    <!-- CTA -->
                 </Grid.ColumnDefinitions>
 
                 <!-- Ventas del Día -->
@@ -94,7 +91,7 @@
                 </Border>
 
                 <!-- Stock Bajo -->
-                <Border Grid.Column="3" Style="{StaticResource StatCard}" Margin="12,0,12,0">
+                <Border Grid.Column="3" Style="{StaticResource StatCard}" Margin="12,0,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -109,16 +106,6 @@
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#D97706"/>
                         </Border>
                     </Grid>
-                </Border>
-
-                <!-- CTA Azul a la derecha -->
-                <Border Grid.Column="4" Style="{StaticResource CtaPrimaryCard}">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Border Width="36" Height="36" CornerRadius="8" Background="#1D4ED8" VerticalAlignment="Center" Margin="0,0,8,0">
-                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <TextBlock Text="Nuevo pedido" Foreground="White" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                    </StackPanel>
                 </Border>
             </Grid>
 
