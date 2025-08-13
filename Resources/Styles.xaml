@@ -385,6 +385,120 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!-- Título de sección (tarjetas) -->
+    <Style x:Key="SectionTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
+    </Style>
+
+    <!-- Divisor sutil -->
+    <SolidColorBrush x:Key="DividerBrush" Color="#E5E7EB"/>
+
+    <!-- Pill de tendencia (verde/rojo) -->
+    <Style x:Key="TrendPillPositive" TargetType="Border">
+        <Setter Property="CornerRadius" Value="999"/>
+        <Setter Property="Padding" Value="8,2"/>
+        <Setter Property="Background" Value="#ECFDF5"/>
+        <!-- green-50 -->
+        <Setter Property="BorderBrush" Value="#A7F3D0"/>
+        <!-- green-200 -->
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+    <Style x:Key="TrendPillNegative" TargetType="Border">
+        <Setter Property="CornerRadius" Value="999"/>
+        <Setter Property="Padding" Value="8,2"/>
+        <Setter Property="Background" Value="#FEF2F2"/>
+        <!-- red-50 -->
+        <Setter Property="BorderBrush" Value="#FECACA"/>
+        <!-- red-200 -->
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <!-- Mini etiqueta gris para leyendas -->
+    <Style x:Key="LegendPill" TargetType="Border">
+        <Setter Property="CornerRadius" Value="999"/>
+        <Setter Property="Padding" Value="6,2"/>
+        <Setter Property="Background" Value="{StaticResource Slate100Brush}"/>
+    </Style>
+    <!-- ===== Tarjetas KPI (look shadcn) ===== -->
+    <Style x:Key="StatCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Background" Value="#FAFAFF"/>
+    </Style>
+
+    <!-- Variante “éxito” verdosa, muy suave -->
+    <Style x:Key="StatCardSuccess" TargetType="Border" BasedOn="{StaticResource StatCard}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#E8FBEF" Offset="0"/>
+                    <GradientStop Color="#F2FFF7" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="#D6F5E2"/>
+    </Style>
+
+    <!-- Iconito a la derecha dentro de la tarjeta -->
+    <Style x:Key="KpiIconPill" TargetType="Border">
+        <Setter Property="Background" Value="#EEF2FF"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="6"/>
+    </Style>
+
+    <!-- Texto “delta” positivo/advertencia -->
+    <Style x:Key="DeltaPositive" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#16A34A"/>
+        <!-- green-600 -->
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+    <Style x:Key="DeltaWarn" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#D97706"/>
+        <!-- amber-600 -->
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!-- Item suave (chips grandes) para listas del dashboard -->
+    <Style x:Key="SoftItem" TargetType="Border">
+        <Setter Property="Background" Value="#F8FAFF"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="BorderBrush" Value="#E5E7F0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <!-- Item suave “warning” (para stock bajo) -->
+    <Style x:Key="SoftItemWarn" TargetType="Border" BasedOn="{StaticResource SoftItem}">
+        <Setter Property="Background" Value="#FFFBEB"/>
+        <!-- amber-50 -->
+        <Setter Property="BorderBrush" Value="#FEF3C7"/>
+        <!-- amber-100 -->
+    </Style>
+
+    <!-- Etiqueta de estado a la derecha -->
+    <Style x:Key="StatusRight" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+    <!-- Tarjeta CTA azul (como en tu captura, derecha) -->
+    <Style x:Key="CtaPrimaryCard" TargetType="Border">
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="16"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#3B82F6" Offset="0"/>
+                    <GradientStop Color="#2563EB" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
 
 
 </ResourceDictionary>
