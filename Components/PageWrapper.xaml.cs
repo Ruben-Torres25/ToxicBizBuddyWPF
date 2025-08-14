@@ -6,7 +6,7 @@ namespace ToxicBizBuddyWPF.Components
     {
         public PageWrapper()
         {
-            InitializeComponent(); // <- esto aparece si el XAML se compila con Build Action = Page
+            InitializeComponent();
         }
     }
 }

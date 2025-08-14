@@ -18,9 +18,9 @@ namespace ToxicBizBuddyWPF.Views
     /// <summary>
     /// Lógica de interacción para Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class ProvidersPage : Page
     {
-        public Page1()
+        public ProvidersPage()
         {
             InitializeComponent();
         }
