@@ -48,5 +48,11 @@ namespace ToxicBizBuddyWPF.Views
             foreach (var b in active)
                 b.Tag = "active";
         }
+
+        private void Providers_Click(object sender, RoutedEventArgs e)
+        {
+            var mw = (MainWindow)Application.Current.MainWindow;
+            mw.MainFrame.Navigate(new ProvidersPage());
+        }
     }
 }

@@ -13,14 +13,16 @@ namespace ToxicBizBuddyWPF.Views
 
         private void AddClient_Click(object sender, RoutedEventArgs e)
         {
+            // Solo visual: abre el diálogo de alta de cliente si ya lo tenés creado
             var dlg = new AddClientDialog { Owner = Application.Current.MainWindow };
             dlg.ShowDialog();
         }
 
         private void DeleteClient_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new ConfirmDialog { Owner = Application.Current.MainWindow };
-            dlg.ShowDialog(); // solo visual
+            // Solo visual: confirma eliminación
+            var confirm = new ConfirmDialog { Owner = Application.Current.MainWindow };
+            confirm.ShowDialog();
         }
     }
 }

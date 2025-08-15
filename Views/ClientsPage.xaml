@@ -3,88 +3,230 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components"
       Title="ClientsPage">
+
+    <!-- Estilos locales de esta página -->
+    <Page.Resources>
+        <!-- Tarjeta métrica base -->
+        <Style x:Key="MetricCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="BorderBrush" Value="#E5E7F0"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+        </Style>
+
+        <!-- Métrica verde (Saldo a favor) -->
+        <Style x:Key="MetricCardSuccess" TargetType="Border" BasedOn="{StaticResource MetricCard}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#E8FBEF" Offset="0"/>
+                        <GradientStop Color="#F4FFF9" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#D6F5E2"/>
+        </Style>
+
+        <!-- Métrica roja (Deudas) -->
+        <Style x:Key="MetricCardDanger" TargetType="Border" BasedOn="{StaticResource MetricCard}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FEECEC" Offset="0"/>
+                        <GradientStop Color="#FFF5F5" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="#F9D3D3"/>
+        </Style>
+
+        <!-- Burbuja de icono dentro de las métricas -->
+        <Style x:Key="MetricIconPill" TargetType="Border">
+            <Setter Property="CornerRadius" Value="999"/>
+            <Setter Property="Background" Value="#EEF2FF"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+    </Page.Resources>
+
     <components:PageWrapper>
-        <StackPanel>
+        <StackPanel Margin="20">
 
-            <TextBlock Text="Clientes" Style="{StaticResource H1}"/>
-            <TextBlock Text="Lista de clientes registrados" Style="{StaticResource Subtle}" Margin="0,4,0,16"/>
+            <!-- Header con botón “+ Nuevo cliente” más bajo -->
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-            <WrapPanel ItemHeight="40" ItemWidth="240" Margin="0,0,0,12">
+                <StackPanel>
+                    <TextBlock Text="Gestión de Clientes" Style="{StaticResource H1}"/>
+                    <TextBlock Text="Administra la información de tus clientes y sus cuentas"
+                               Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
+                </StackPanel>
 
-                <!-- Search -->
-                <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="8" Width="320" Margin="0,0,12,12">
+                <Button Grid.Column="1"
+                        Padding="10,4"
+                        Background="#22C55E"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="AddClient_Click">
+                    <TextBlock Text="+ Nuevo cliente" FontWeight="SemiBold"/>
+                </Button>
+            </Grid>
+
+            <!-- Fila de métricas -->
+            <Grid Margin="0,0,0,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Total Clientes -->
+                <Border Grid.Column="0" Style="{StaticResource MetricCard}" Margin="0,0,12,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Style="{StaticResource InputText}" BorderThickness="0" Background="Transparent" Padding="0" ToolTip="Buscar clientes"/>
+                        <StackPanel>
+                            <TextBlock Text="Total Clientes" Style="{StaticResource Subtle}"/>
+                            <TextBlock Text="142" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"
+                                       Foreground="{StaticResource TextStrongBrush}"/>
+                        </StackPanel>
+                        <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#1E40AF"/>
+                        </Border>
                     </Grid>
                 </Border>
 
-                <!-- Filtros -->
-                <ComboBox Style="{StaticResource InputCombo}" Width="220" Margin="0,0,12,12">
-                    <ComboBoxItem Content="Estado: Todos" IsSelected="True"/>
-                    <ComboBoxItem Content="Activo"/>
-                    <ComboBoxItem Content="Inactivo"/>
-                </ComboBox>
+                <!-- Saldo a Favor -->
+                <Border Grid.Column="1" Style="{StaticResource MetricCardSuccess}" Margin="12,0,12,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Saldo a Favor" Style="{StaticResource Subtle}"/>
+                            <TextBlock Text="€680.75" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"
+                                       Foreground="#16A34A"/>
+                        </StackPanel>
+                        <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0" Background="#E8FFF3">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#16A34A"/>
+                        </Border>
+                    </Grid>
+                </Border>
 
-                <ComboBox Style="{StaticResource InputCombo}" Width="220" Margin="0,0,12,12">
-                    <ComboBoxItem Content="Ordenar: Nombre (A-Z)" IsSelected="True"/>
-                    <ComboBoxItem Content="Nombre (Z-A)"/>
-                    <ComboBoxItem Content="Creación (recientes)"/>
-                    <ComboBoxItem Content="Creación (antiguos)"/>
-                </ComboBox>
+                <!-- Deudas Pendientes -->
+                <Border Grid.Column="2" Style="{StaticResource MetricCardDanger}" Margin="12,0,0,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Deudas Pendientes" Style="{StaticResource Subtle}"/>
+                            <TextBlock Text="€120.50" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"
+                                       Foreground="#DC2626"/>
+                        </StackPanel>
+                        <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0" Background="#FFF1F2">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#DC2626"/>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
 
-                <!-- Chips -->
-                <ToggleButton Style="{StaticResource FilterPill}" Content="Con deuda" Margin="0,0,12,12"/>
-                <ToggleButton Style="{StaticResource FilterPill}" Content="Con descuento" Margin="0,0,12,12"/>
+            <!-- Barra de búsqueda + botón Filtros -->
+            <Border CornerRadius="12" BorderBrush="#E5E7F0" BorderThickness="1" Background="White" Padding="8" Margin="0,0,0,16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <!-- Acciones -->
-                <Button Style="{StaticResource BtnPrimary}" Content="+ Agregar cliente" Margin="0,0,12,12" Click="AddClient_Click"/>
-                <Button Style="{StaticResource BtnGhost}" Content="Importar" Margin="0,0,12,12"/>
+                    <!-- Input con icono -->
+                    <Border CornerRadius="8" BorderBrush="#E5E7F0" BorderThickness="1" Background="White" Padding="10" Margin="0,0,8,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBox Grid.Column="1"
+                                     Background="Transparent" BorderThickness="0" Padding="0"
+                                     Style="{StaticResource InputText}"
+                                     ToolTip="Buscar clientes por nombre, email o teléfono..."/>
+                        </Grid>
+                    </Border>
 
-                <!-- Badge -->
-                <ContentControl Style="{StaticResource Badge}" Content="Total: 0" Margin="0,0,12,12"/>
-            </WrapPanel>
-
-            <!-- Tabla -->
-            <Border Style="{StaticResource CardStyle}">
-                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" HeadersVisibility="Column" Padding="4"
-          Style="{StaticResource DataGridBase}" ColumnHeaderStyle="{StaticResource DataGridHeader}" RowStyle="{StaticResource DataGridRowStyle}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Nombre"   Binding="{Binding Nombre}"   Width="*"/>
-                        <DataGridTextColumn Header="DNI"      Binding="{Binding DNI}"      Width="150"/>
-                        <DataGridTextColumn Header="Teléfono" Binding="{Binding Telefono}" Width="150"/>
-                        <DataGridTextColumn Header="Email"    Binding="{Binding Email}"    Width="*"/>
-
-                        <!-- Acciones -->
-                        <DataGridTemplateColumn Header="Acciones" Width="160">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Editar" Margin="0,0,6,0">
-                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
-                                        </Button>
-                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Eliminar" Click="DeleteClient_Click">
-                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-
+                    <!-- Botón Filtros -->
+                    <Button Grid.Column="1"
+                            Padding="10,8"
+                            Background="White"
+                            Foreground="{StaticResource TextStrongBrush}"
+                            BorderBrush="#E5E7F0"
+                            BorderThickness="1"
+                            Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
+                            <TextBlock Text="Filtros"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </Border>
 
-            <!-- Footer de tabla -->
-            <components:Pagination/>
+            <!-- Card: Lista de Clientes -->
+            <Border Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Lista de Clientes" Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
+                    <Separator Background="{StaticResource DividerBrush}" Height="1" Margin="0,8,0,8"/>
 
-            <!-- Empty state (dejar comentado; visible si no hay datos)
-      <components:EmptyState/>
-      -->
+                    <DataGrid AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              HeadersVisibility="Column"
+                              Padding="4"
+                              Style="{StaticResource DataGridBase}"
+                              ColumnHeaderStyle="{StaticResource DataGridHeader}"
+                              RowStyle="{StaticResource DataGridRowStyle}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Cliente"       Binding="{Binding Nombre}"            Width="2*"/>
+                            <DataGridTextColumn Header="Contacto"      Binding="{Binding Email}"             Width="2*"/>
+                            <DataGridTextColumn Header="Pedidos"       Binding="{Binding Pedidos}"           Width="120"/>
+                            <DataGridTextColumn Header="Saldo"         Binding="{Binding Saldo}"             Width="150"/>
+                            <DataGridTextColumn Header="Último Pedido" Binding="{Binding UltimoPedidoFecha}" Width="160"/>
+
+                            <!-- Acciones -->
+                            <DataGridTemplateColumn Header="Acciones" Width="180">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Ver" Margin="0,0,6,0">
+                                                <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
+                                            </Button>
+                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Editar" Margin="0,0,6,0">
+                                                <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
+                                            </Button>
+                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Historial" Margin="0,0,6,0">
+                                                <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
+                                            </Button>
+                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Eliminar" Click="DeleteClient_Click">
+                                                <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- Paginación -->
+            <components:Pagination/>
 
         </StackPanel>
     </components:PageWrapper>

@@ -32,6 +32,13 @@
                         <TextBlock Text="Clientes"/>
                     </StackPanel>
                 </Button>
+                <Button Style="{StaticResource SidebarButtonStyle}" Click="Providers_Click">
+                    <StackPanel Orientation="Horizontal" Margin="10,0">
+                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,8,0"/>
+                        <TextBlock Text="Proveedores"/>
+                    </StackPanel>
+                </Button>
+
             </StackPanel>
         </StackPanel>
     </Border>
