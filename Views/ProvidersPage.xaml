@@ -6,6 +6,14 @@
 
     <!-- Estilos locales (no tocan Styles.xaml) -->
     <Page.Resources>
+        <!-- Botón outline verde basado en tu BtnPrimary (para conservar template y border-radius) -->
+        <Style x:Key="BtnPrimaryOutlineGreen" TargetType="Button" BasedOn="{StaticResource BtnPrimary}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#16A34A"/>
+            <Setter Property="BorderBrush" Value="#86EFAC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
         <!-- Tarjeta métrica base -->
         <Style x:Key="MetricCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
             <Setter Property="Padding" Value="16"/>
@@ -77,33 +85,28 @@
                 <StackPanel>
                     <TextBlock Text="Gestión de Proveedores" Style="{StaticResource H1}"/>
                     <TextBlock Text="Administra tus proveedores y recepción de mercadería"
-                     Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
+                               Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
                 </StackPanel>
 
-                <!-- Registrar Mercadería (outline verde con icono cubo) -->
+                <!-- Registrar Mercadería (outline verde) -->
                 <Button Grid.Column="1"
-                Padding="10,4"
-                Margin="0,0,8,0"
-                Background="White"
-                Foreground="#16A34A"
-                BorderBrush="#86EFAC"
-                BorderThickness="1"
-                Cursor="Hand">
+                        Style="{StaticResource BtnPrimary}"
+                        Padding="14,8"
+                        Margin="0,0,8,0">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
-                        <!-- icono paquete -->
-                        <TextBlock Text="Registrar Mercadería" FontWeight="SemiBold"/>
+                        <TextBlock Text="Registrar Mercadería"/>
                     </StackPanel>
                 </Button>
 
-                <!-- + Nuevo Proveedor (azul) -->
+                <!-- + Nuevo Proveedor (azul, como BtnPrimary del ejemplo) -->
                 <Button Grid.Column="2"
-                Padding="10,4"
-                Background="#2563EB"
-                Foreground="White"
-                BorderThickness="0"
-                Cursor="Hand">
-                    <TextBlock Text="+ Nuevo Proveedor" FontWeight="SemiBold"/>
+                        Style="{StaticResource BtnPrimary}"
+                        Padding="14,8">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
+                        <TextBlock Text="Nuevo Proveedor"/>
+                    </StackPanel>
                 </Button>
             </Grid>
 
@@ -126,11 +129,10 @@
                         <StackPanel>
                             <TextBlock Text="Total Proveedores" Style="{StaticResource Subtle}"/>
                             <TextBlock Text="24" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"
-                         Foreground="{StaticResource TextStrongBrush}"/>
+                                       Foreground="{StaticResource TextStrongBrush}"/>
                         </StackPanel>
                         <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#1E40AF"/>
-                            <!-- camión -->
                         </Border>
                     </Grid>
                 </Border>
@@ -148,7 +150,6 @@
                         </StackPanel>
                         <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0" Background="#E8FFF3">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#16A34A"/>
-                            <!-- camión -->
                         </Border>
                     </Grid>
                 </Border>
@@ -166,7 +167,6 @@
                         </StackPanel>
                         <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0" Background="#FFF7ED">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#D97706"/>
-                            <!-- paquete -->
                         </Border>
                     </Grid>
                 </Border>
@@ -184,7 +184,6 @@
                         </StackPanel>
                         <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#1D4ED8"/>
-                            <!-- caja/cubo genérico -->
                         </Border>
                     </Grid>
                 </Border>
@@ -206,19 +205,19 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
                             <TextBox Grid.Column="1"
-                       Background="Transparent" BorderThickness="0" Padding="0"
-                       Style="{StaticResource InputText}"
-                       ToolTip="Buscar proveedores por nombre o contacto..."/>
+                                     Background="Transparent" BorderThickness="0" Padding="0"
+                                     Style="{StaticResource InputText}"
+                                     ToolTip="Buscar proveedores por nombre o contacto..."/>
                         </Grid>
                     </Border>
 
                     <Button Grid.Column="1"
-                  Padding="10,8"
-                  Background="White"
-                  Foreground="{StaticResource TextStrongBrush}"
-                  BorderBrush="#E5E7F0"
-                  BorderThickness="1"
-                  Cursor="Hand">
+                            Padding="10,8"
+                            Background="White"
+                            Foreground="{StaticResource TextStrongBrush}"
+                            BorderBrush="#E5E7F0"
+                            BorderThickness="1"
+                            Cursor="Hand">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
                             <TextBlock Text="Filtros"/>
@@ -234,12 +233,12 @@
                     <Separator Background="{StaticResource DividerBrush}" Height="1" Margin="0,8,0,8"/>
 
                     <DataGrid AutoGenerateColumns="False"
-                    CanUserAddRows="False"
-                    HeadersVisibility="Column"
-                    Padding="4"
-                    Style="{StaticResource DataGridBase}"
-                    ColumnHeaderStyle="{StaticResource DataGridHeader}"
-                    RowStyle="{StaticResource DataGridRowStyle}">
+                              CanUserAddRows="False"
+                              HeadersVisibility="Column"
+                              Padding="4"
+                              Style="{StaticResource DataGridBase}"
+                              ColumnHeaderStyle="{StaticResource DataGridHeader}"
+                              RowStyle="{StaticResource DataGridRowStyle}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Proveedor"      Binding="{Binding Nombre}"      Width="2*"/>
                             <DataGridTextColumn Header="Contacto"       Binding="{Binding Contacto}"    Width="2*"/>
