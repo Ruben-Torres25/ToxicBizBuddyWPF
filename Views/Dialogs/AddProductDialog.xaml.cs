@@ -8,24 +8,34 @@ namespace ToxicBizBuddyWPF.Views.Dialogs
         public AddProductDialog()
         {
             InitializeComponent();
-
-            // No permitir fechas pasadas para el vencimiento:
-            ExpiryDatePicker.DisplayDateStart = DateTime.Today;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false; // solo visual
+            DialogResult = false;
             Close();
         }
 
-        // Habilita/Deshabilita el DatePicker si marcan "Sin vencimiento"
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            // 🔜 acá podrías validar (nombre obligatorio, etc.)
+            // Por ahora, cerramos como OK para que la página sepa que se “guardó”.
+            DialogResult = true;
+            Close();
+        }
+
         private void NoExpiryCheck_Changed(object sender, RoutedEventArgs e)
         {
-            if (ExpiryDatePicker == null) return;
-            bool noExpiry = NoExpiryCheck.IsChecked == true;
-            ExpiryDatePicker.IsEnabled = !noExpiry;
-            if (noExpiry) ExpiryDatePicker.SelectedDate = null;
+            // Habilita/Deshabilita el DatePicker según el checkbox
+            if (ExpiryDatePicker != null)
+            {
+                bool noExpiry = NoExpiryCheck?.IsChecked == true;
+                ExpiryDatePicker.IsEnabled = !noExpiry;
+                if (noExpiry)
+                {
+                    ExpiryDatePicker.SelectedDate = null;
+                }
+            }
         }
     }
 }

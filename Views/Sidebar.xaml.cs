@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ToxicBizBuddyWPF.Views
@@ -8,51 +9,60 @@ namespace ToxicBizBuddyWPF.Views
         public Sidebar()
         {
             InitializeComponent();
-            // Activo inicial
+            // Al iniciar, dejamos Dashboard como activo
             SetActive(BtnDashboard);
+        }
+
+        private MainWindow Shell => Application.Current.MainWindow as MainWindow;
+
+        private void SetActive(Button btn)
+        {
+            foreach (var b in MenuHost.Children.OfType<Button>())
+                b.Tag = null;          // limpia estado activo
+
+            btn.Tag = "active";         // activa el actual
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
-            Navigate("Dashboard");
-            SetActive(BtnDashboard);
+            SetActive((Button)sender);
+            Shell?.MainFrame?.Navigate(new Views.DashboardPage());
         }
 
-        private void Products_Click(object sender, RoutedEventArgs e)
+        private void Orders_Click(object sender, RoutedEventArgs e)
         {
-            Navigate("Productos");
-            SetActive(BtnProductos);
+            SetActive((Button)sender);
+            // Navegación a Orders si la tenés
         }
 
         private void Clients_Click(object sender, RoutedEventArgs e)
         {
-            Navigate("Clientes");
-            SetActive(BtnClientes);
+            SetActive((Button)sender);
+            Shell?.MainFrame?.Navigate(new Views.ClientsPage());
         }
 
-        private void Navigate(string target)
+        private void Products_Click(object sender, RoutedEventArgs e)
         {
-            if (Window.GetWindow(this) is MainWindow win)
-            {
-                win.NavigateTo(target);
-            }
-        }
-
-        private void SetActive(params Button[] active)
-        {
-            // limpiar
-            BtnDashboard.Tag = null;
-            BtnProductos.Tag = null;
-            BtnClientes.Tag = null;
-
-            foreach (var b in active)
-                b.Tag = "active";
+            SetActive((Button)sender);
+            Shell?.MainFrame?.Navigate(new Views.ProductsPage());
         }
 
         private void Providers_Click(object sender, RoutedEventArgs e)
         {
-            var mw = (MainWindow)Application.Current.MainWindow;
-            mw.MainFrame.Navigate(new ProvidersPage());
+            SetActive((Button)sender);
+            Shell?.MainFrame?.Navigate(new Views.ProvidersPage());
+        }
+
+        private void Caja_Click(object sender, RoutedEventArgs e)
+        {
+            SetActive((Button)sender);
+            // Navegación a Caja si corresponde
+        }
+
+        private void Reports_Click(object sender, RoutedEventArgs e)
+        {
+            SetActive((Button)sender);
+            // Navegación a Reportes si corresponde
         }
     }
 }

@@ -499,6 +499,8 @@
         </Setter>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
+    <!-- Color de texto sutil (gris) -->
+    <SolidColorBrush x:Key="TextSubtleBrush" Color="#6B7280"/>
 
 
 </ResourceDictionary>
