@@ -3,85 +3,156 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       Title="Gestión de Pedidos">
 
-    <!-- Recursos locales -->
+    <!-- ===== Estilos LOCALES, seguros (no usan PlaceholderText ni CornerRadius en Button) ===== -->
     <Page.Resources>
-        <!-- Botón header azul -->
-        <Style x:Key="HeaderPrimaryButton" TargetType="Button" BasedOn="{StaticResource BtnPrimary}">
-            <Setter Property="Padding" Value="10,6"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
+
+        <!-- Card base (si ya existe CardStyle global, podés borrar esto) -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="16"/>
         </Style>
 
-        <!-- Botón ghost redondeado -->
-        <Style x:Key="GhostRounded" TargetType="Button">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
-            <Setter Property="BorderBrush" Value="#E5E7F0"/>
+        <!-- Títulos (si ya tenés H1/Subtle/SectionTitle en Styles.xaml, eliminá estos) -->
+        <Style x:Key="H1" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+        </Style>
+        <Style x:Key="Subtle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="#6B7280"/>
+        </Style>
+        <Style x:Key="SectionTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#0F172A"/>
+        </Style>
+
+        <!-- Input -->
+        <Style x:Key="InputText" TargetType="TextBox">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <!-- Botón primario (pill) -->
+        <Style x:Key="BtnPrimary" TargetType="Button">
+            <Setter Property="Background" Value="#2563EB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="10"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <!-- pill mediante Border -->
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="10"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              Margin="10,0"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!-- Caja de búsqueda -->
-        <Style x:Key="SearchFieldBorder" TargetType="Border">
-            <Setter Property="CornerRadius" Value="10"/>
+        <!-- Botón fantasma con borde (para Filtros) -->
+        <Style x:Key="BtnGhost" TargetType="Button">
             <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="#E5E7F0"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"
+                                              Margin="8,0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
-        <!-- Icon buttons -->
-        <Style x:Key="ActionIconButton" TargetType="Button" BasedOn="{StaticResource IconButtonGhost}">
+        <!-- Icono MDL2 -->
+        <Style x:Key="Icon" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Botón redondo pequeño para la columna Acciones -->
+        <Style x:Key="IconButtonGhost" TargetType="Button">
             <Setter Property="Width" Value="34"/>
             <Setter Property="Height" Value="34"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="8"
-                                Background="White"
-                                BorderBrush="#E5E7F0"
-                                BorderThickness="1">
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!-- Pills de estado -->
-        <Style x:Key="PillBase" TargetType="Border">
+        <!-- Badges de estado -->
+        <Style x:Key="BadgeBase" TargetType="Border">
             <Setter Property="CornerRadius" Value="999"/>
-            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="BadgeCompleted" TargetType="Border" BasedOn="{StaticResource BadgeBase}">
+            <Setter Property="Background" Value="#DCFCE7"/>
+            <Setter Property="BorderBrush" Value="#BBF7D0"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        <Style x:Key="PillSuccess" TargetType="Border" BasedOn="{StaticResource PillBase}">
-            <Setter Property="Background" Value="#E7F8EE"/>
-            <Setter Property="BorderBrush" Value="#A7E4C3"/>
+        <Style x:Key="BadgePending" TargetType="Border" BasedOn="{StaticResource BadgeBase}">
+            <Setter Property="Background" Value="#FEF9C3"/>
+            <Setter Property="BorderBrush" Value="#FDE68A"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
-        <Style x:Key="PillWarning" TargetType="Border" BasedOn="{StaticResource PillBase}">
-            <Setter Property="Background" Value="#FEF3C7"/>
-            <Setter Property="BorderBrush" Value="#FACC15"/>
-        </Style>
-        <Style x:Key="PillDanger" TargetType="Border" BasedOn="{StaticResource PillBase}">
+        <Style x:Key="BadgeCanceled" TargetType="Border" BasedOn="{StaticResource BadgeBase}">
             <Setter Property="Background" Value="#FEE2E2"/>
-            <Setter Property="BorderBrush" Value="#FCA5A5"/>
+            <Setter Property="BorderBrush" Value="#FECACA"/>
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
 
-        <!-- Link del número de pedido -->
+        <!-- DataGrid base (si ya lo tenés global, podés quitar esto) -->
+        <Style x:Key="DataGridBase" TargetType="DataGrid">
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="RowBackground" Value="White"/>
+            <Setter Property="AlternatingRowBackground" Value="#FCFCFF"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="RowHeight" Value="44"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!-- Acción de texto en link para el número de pedido -->
         <Style x:Key="OrderLink" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#2563EB"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -89,172 +160,197 @@
         </Style>
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="20">
+    <!-- ===== LAYOUT ===== -->
+    <Grid Background="#F8FAFF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <!-- Header -->
-            <Grid Margin="0,0,0,16">
+        <!-- Header con título + botón Nuevo Pedido -->
+        <Grid Margin="24,20,24,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <TextBlock Text="Gestión de Pedidos" Style="{StaticResource H1}"/>
+                <TextBlock Text="Administra todos los pedidos de tus clientes"
+                           Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <Button Grid.Column="1" Style="{StaticResource BtnPrimary}" Click="NewOrder_Click">
+                <StackPanel Orientation="Horizontal">
+                    <!-- PLUS = E710 -->
+                    <TextBlock Style="{StaticResource Icon}" Text="&#xE710;" Margin="0,0,8,0"/>
+                    <TextBlock Text="Nuevo Pedido"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- Barra de búsqueda + Filtros -->
+        <Border Grid.Row="1" Margin="24,0,24,16" Padding="8"
+                Background="White" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="12">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel>
-                    <TextBlock Text="Gestión de Pedidos" Style="{StaticResource H1}"/>
-                    <TextBlock Text="Administra todos los pedidos de tus clientes"
-                               Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
-                </StackPanel>
+                <!-- Search -->
+                <Border CornerRadius="8" BorderBrush="#E5E7EB" BorderThickness="1" Background="White" Padding="10" Margin="0,0,8,0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- SEARCH = E721 -->
+                        <TextBlock Style="{StaticResource Icon}" Text="&#xE721;" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBox Grid.Column="1"
+                                 Style="{StaticResource InputText}"
+                                 BorderThickness="0"
+                                 ToolTip="Buscar por cliente o número de pedido…"
+                                 Background="Transparent"
+                                 />
+                    </Grid>
+                </Border>
 
-                <Button Grid.Column="1" Style="{StaticResource HeaderPrimaryButton}" Click="NewOrder_Click">
+                <!-- Filtros -->
+                <Button Grid.Column="1" Style="{StaticResource BtnGhost}" Click="OpenFilters_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
-                        <TextBlock Text="+ Nuevo Pedido"/>
+                        <!-- FILTER = E16E -->
+                        <TextBlock Style="{StaticResource Icon}" Text="&#xE16E;" Margin="0,0,8,0"/>
+                        <TextBlock Text="Filtros"/>
                     </StackPanel>
                 </Button>
             </Grid>
+        </Border>
 
-            <!-- Buscador + Filtros -->
-            <Border CornerRadius="12" BorderBrush="#E5E7F0" BorderThickness="1" Background="#FBFBFE" Padding="8" Margin="0,0,0,16">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+        <!-- Lista de pedidos (card) -->
+        <Border Grid.Row="2" Margin="24" Style="{StaticResource CardStyle}">
+            <StackPanel>
+                <TextBlock Text="Lista de Pedidos" Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
+                <Separator Background="#E5E7EB" Height="1" Margin="0,8,0,8"/>
 
-                    <Border Style="{StaticResource SearchFieldBorder}" Margin="0,0,8,0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                            <TextBox Grid.Column="1"
-                                     Background="Transparent" BorderThickness="0" Padding="0"
-                                     Style="{StaticResource InputText}"
-                                     ToolTip="Buscar por cliente o número de pedido…"
-                                     TextChanged="SearchBox_TextChanged"/>
-                        </Grid>
-                    </Border>
+                <DataGrid x:Name="OrdersGrid"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          Style="{StaticResource DataGridBase}">
+                    <DataGrid.Columns>
 
-                    <Button Grid.Column="1" Style="{StaticResource GhostRounded}" Click="OpenFilters_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
-                            <TextBlock Text="Filtros"/>
-                        </StackPanel>
-                    </Button>
-                </Grid>
-            </Border>
+                        <!-- Pedido (link) -->
+                        <DataGridTemplateColumn Header="Pedido" Width="140">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Pedido}"
+                                               Style="{StaticResource OrderLink}"
+                                               MouseLeftButtonUp="OpenOrderLink_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-            <!-- Lista -->
-            <Border Style="{StaticResource CardStyle}">
-                <StackPanel>
-                    <TextBlock Text="Lista de Pedidos" Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
-                    <Separator Background="{StaticResource DividerBrush}" Height="1" Margin="0,8,0,8"/>
+                        <!-- Cliente -->
+                        <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente}" Width="2*"/>
 
-                    <DataGrid x:Name="OrdersGrid"
-                              AutoGenerateColumns="False"
-                              CanUserAddRows="False"
-                              HeadersVisibility="Column"
-                              Padding="4"
-                              ItemsSource="{Binding Orders}"
-                              Style="{StaticResource DataGridBase}"
-                              ColumnHeaderStyle="{StaticResource DataGridHeader}"
-                              RowStyle="{StaticResource DataGridRowStyle}">
-                        <DataGrid.Columns>
+                        <!-- Fecha -->
+                        <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" Width="160"/>
 
-                            <!-- Pedido como link -->
-                            <DataGridTemplateColumn Header="Pedido" Width="140">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Style="{StaticResource OrderLink}"
-                                                   Text="{Binding Pedido}"
-                                                   MouseLeftButtonUp="OrderLink_Click"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                        <!-- Items -->
+                        <DataGridTextColumn Header="Items" Binding="{Binding Items}" Width="120"/>
 
-                            <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente}" Width="2*"/>
-                            <DataGridTextColumn Header="Fecha"   Binding="{Binding Fecha}"   Width="160"/>
-                            <DataGridTextColumn Header="Items"   Binding="{Binding Items}"   Width="120"/>
-                            <DataGridTextColumn Header="Total"   Binding="{Binding Total}"   Width="140"/>
+                        <!-- Total -->
+                        <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="140"/>
 
-                            <!-- Estado -->
-                            <DataGridTemplateColumn Header="Estado" Width="190">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ContentControl>
-                                            <ContentControl.Style>
-                                                <Style TargetType="ContentControl">
-                                                    <Setter Property="Content">
-                                                        <Setter.Value>
-                                                            <Border Style="{StaticResource PillWarning}">
-                                                                <StackPanel Orientation="Horizontal">
-                                                                    <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
-                                                                    <TextBlock Text="Pendiente" FontWeight="SemiBold"/>
+                        <!-- Estado (badge) -->
+                        <DataGridTemplateColumn Header="Estado" Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ContentControl Content="{Binding Estado}">
+                                        <ContentControl.Style>
+                                            <Style TargetType="ContentControl">
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+                                                        <DataTemplate>
+                                                            <Border Style="{StaticResource BadgeCompleted}">
+                                                                <StackPanel Orientation="Horizontal" >
+                                                                    <!-- CHECK = E73E -->
+                                                                    <TextBlock Style="{StaticResource Icon}" Text="&#xE73E;" Margin="0,0,6,0"/>
+                                                                    <TextBlock Text="Completado"/>
                                                                 </StackPanel>
                                                             </Border>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Estado}" Value="Completado">
-                                                            <Setter Property="Content">
-                                                                <Setter.Value>
-                                                                    <Border Style="{StaticResource PillSuccess}">
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding}" Value="Pendiente">
+                                                        <Setter Property="ContentTemplate">
+                                                            <Setter.Value>
+                                                                <DataTemplate>
+                                                                    <Border Style="{StaticResource BadgePending}">
                                                                         <StackPanel Orientation="Horizontal">
-                                                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
-                                                                            <TextBlock Text="Completado" FontWeight="SemiBold"/>
+                                                                            <!-- CLOCK = E823 -->
+                                                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE823;" Margin="0,0,6,0"/>
+                                                                            <TextBlock Text="Pendiente"/>
                                                                         </StackPanel>
                                                                     </Border>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Estado}" Value="Cancelado">
-                                                            <Setter Property="Content">
-                                                                <Setter.Value>
-                                                                    <Border Style="{StaticResource PillDanger}">
+                                                                </DataTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding}" Value="Cancelado">
+                                                        <Setter Property="ContentTemplate">
+                                                            <Setter.Value>
+                                                                <DataTemplate>
+                                                                    <Border Style="{StaticResource BadgeCanceled}">
                                                                         <StackPanel Orientation="Horizontal">
-                                                                            <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
-                                                                            <TextBlock Text="Cancelado" FontWeight="SemiBold"/>
+                                                                            <!-- CANCEL (Close) = E711 -->
+                                                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE711;" Margin="0,0,6,0"/>
+                                                                            <TextBlock Text="Cancelado"/>
                                                                         </StackPanel>
                                                                     </Border>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ContentControl.Style>
-                                        </ContentControl>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                                                                </DataTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                            <!-- Acciones -->
-                            <DataGridTemplateColumn Header="Acciones" Width="200">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Style="{StaticResource ActionIconButton}" ToolTip="Ver" Margin="0,0,6,0" Click="ViewOrder_Click">
-                                                <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
-                                            </Button>
-                                            <Button Style="{StaticResource ActionIconButton}" ToolTip="Editar" Margin="0,0,6,0" Click="EditOrder_Click">
-                                                <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
-                                            </Button>
-                                            <Button Style="{StaticResource ActionIconButton}" ToolTip="Duplicar" Margin="0,0,6,0" Click="DuplicateOrder_Click">
-                                                <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
-                                            </Button>
-                                            <Button Style="{StaticResource ActionIconButton}" ToolTip="Eliminar" Click="DeleteOrder_Click">
-                                                <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                        <!-- Acciones -->
+                        <DataGridTemplateColumn Header="Acciones" Width="220">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                                        <!-- Ver (E8F4) -->
+                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Ver" Click="ViewOrder_Click" Margin="0,0,8,0">
+                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE8F4;"/>
+                                        </Button>
+                                        <!-- Editar (E70F) -->
+                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Editar" Click="EditOrder_Click" Margin="0,0,8,0">
+                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE70F;"/>
+                                        </Button>
+                                        <!-- Duplicar (E8C8) -->
+                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Duplicar" Click="DuplicateOrder_Click" Margin="0,0,8,0">
+                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE8C8;"/>
+                                        </Button>
+                                        <!-- Eliminar (E74D) -->
+                                        <Button Style="{StaticResource IconButtonGhost}" ToolTip="Eliminar" Click="DeleteOrder_Click">
+                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE74D;"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </Border>
-
-        </StackPanel>
-    </ScrollViewer>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+    </Grid>
 </Page>

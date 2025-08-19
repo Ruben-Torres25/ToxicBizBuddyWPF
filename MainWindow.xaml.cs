@@ -23,8 +23,6 @@ namespace ToxicBizBuddyWPF
                 "Clients" => new ClientsPage(),
                 "Products" => new ProductsPage(),
                 "Providers" => new ProvidersPage(),
-                "Cash" => new CashPage(),
-                "Reports" => new ReportsPage(),
                 _ => new DashboardPage(),
             };
 
