@@ -9,60 +9,59 @@ namespace ToxicBizBuddyWPF.Views
         public Sidebar()
         {
             InitializeComponent();
-            // Al iniciar, dejamos Dashboard como activo
-            SetActive(BtnDashboard);
+            SetActive(BtnDashboard); // activo por defecto
         }
 
-        private MainWindow Shell => Application.Current.MainWindow as MainWindow;
-
-        private void SetActive(Button btn)
-        {
-            foreach (var b in MenuHost.Children.OfType<Button>())
-                b.Tag = null;          // limpia estado activo
-
-            btn.Tag = "active";         // activa el actual
-        }
-
+        // Navegación: llamamos al método público del MainWindow
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
             SetActive((Button)sender);
-            Shell?.MainFrame?.Navigate(new Views.DashboardPage());
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Dashboard");
         }
 
         private void Orders_Click(object sender, RoutedEventArgs e)
         {
             SetActive((Button)sender);
-            // Navegación a Orders si la tenés
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Orders");
         }
 
         private void Clients_Click(object sender, RoutedEventArgs e)
         {
             SetActive((Button)sender);
-            Shell?.MainFrame?.Navigate(new Views.ClientsPage());
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Clients");
         }
 
         private void Products_Click(object sender, RoutedEventArgs e)
         {
             SetActive((Button)sender);
-            Shell?.MainFrame?.Navigate(new Views.ProductsPage());
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Products");
         }
 
         private void Providers_Click(object sender, RoutedEventArgs e)
         {
             SetActive((Button)sender);
-            Shell?.MainFrame?.Navigate(new Views.ProvidersPage());
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Providers");
         }
 
-        private void Caja_Click(object sender, RoutedEventArgs e)
+        private void Cash_Click(object sender, RoutedEventArgs e)
         {
             SetActive((Button)sender);
-            // Navegación a Caja si corresponde
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Cash");
         }
 
         private void Reports_Click(object sender, RoutedEventArgs e)
         {
             SetActive((Button)sender);
-            // Navegación a Reportes si corresponde
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Reports");
+        }
+
+        // Visual activo
+        private void SetActive(Button activeButton)
+        {
+            foreach (var btn in MenuStack.Children.OfType<Button>())
+                btn.Tag = null;
+
+            activeButton.Tag = "active";
         }
     }
 }

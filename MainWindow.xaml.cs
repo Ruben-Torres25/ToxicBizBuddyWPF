@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using ToxicBizBuddyWPF.Views;
 
 namespace ToxicBizBuddyWPF
@@ -8,17 +9,26 @@ namespace ToxicBizBuddyWPF
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new DashboardPage());
+            // Arranca en Dashboard (si tenés otra inicial, cambiala aquí)
+            NavigateTo("Dashboard");
         }
 
-        public void NavigateTo(string target)
+        // Navegación centralizada
+        public void NavigateTo(string route)
         {
-            switch (target)
+            Page page = route switch
             {
-                case "Dashboard": MainFrame.Navigate(new DashboardPage()); break;
-                case "Productos": MainFrame.Navigate(new ProductsPage()); break;
-                case "Clientes": MainFrame.Navigate(new ClientsPage()); break;
-            }
+                "Dashboard" => new DashboardPage(),
+                "Orders" => new OrdersPage(),   // <-- Pedidos
+                "Clients" => new ClientsPage(),
+                "Products" => new ProductsPage(),
+                "Providers" => new ProvidersPage(),
+                "Cash" => new CashPage(),
+                "Reports" => new ReportsPage(),
+                _ => new DashboardPage(),
+            };
+
+            MainFrame.Navigate(page);
         }
     }
 }
