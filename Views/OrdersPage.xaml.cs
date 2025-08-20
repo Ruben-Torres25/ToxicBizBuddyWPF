@@ -1,61 +1,60 @@
-using System.Collections.Generic;
+using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
 
 namespace ToxicBizBuddyWPF.Views
 {
     public partial class OrdersPage : Page
     {
+        public ObservableCollection<Pedido> Orders { get; set; }
+
         public OrdersPage()
         {
             InitializeComponent();
 
-            var sample = new List<OrderRow>
+            Orders = new ObservableCollection<Pedido>
             {
-                new("PED001","María García","2024-01-08","3 items","450.00","Completado"),
-                new("PED002","Carlos López","2024-01-08","2 items","230.50","Pendiente"),
-                new("PED003","Ana Rodríguez","2024-01-07","5 items","680.00","Pendiente"),
-                new("PED004","Luis Martín","2024-01-07","2 items","320.75","Cancelado"),
+                new Pedido { Codigo = "PED001", Cliente = "María García", Fecha = "2024-01-08", Items = "3 items", Total = "$450.00", Estado = "✔ Completado", EstadoColor = new SolidColorBrush(Color.FromRgb(198, 246, 213)) },
+                new Pedido { Codigo = "PED002", Cliente = "Carlos López", Fecha = "2024-01-08", Items = "2 items", Total = "$230.50", Estado = "⏳ Pendiente", EstadoColor = new SolidColorBrush(Color.FromRgb(255, 236, 179)) },
+                new Pedido { Codigo = "PED003", Cliente = "Ana Rodríguez", Fecha = "2024-01-07", Items = "5 items", Total = "$680.00", Estado = "⏳ Pendiente", EstadoColor = new SolidColorBrush(Color.FromRgb(255, 236, 179)) },
+                new Pedido { Codigo = "PED004", Cliente = "Luis Martín", Fecha = "2024-01-07", Items = "2 items", Total = "$320.75", Estado = "❌ Cancelado", EstadoColor = new SolidColorBrush(Color.FromRgb(255, 205, 210)) }
             };
 
-            DataContext = sample;
+            this.DataContext = this;
         }
-
-        private void NewOrder_Click(object sender, RoutedEventArgs e) =>
-            MessageBox.Show("Nuevo Pedido (visual)");
-
-        private void Filters_Click(object sender, RoutedEventArgs e) =>
-            MessageBox.Show("Abrir filtros (visual)");
-
-        private static void ShowAction(object sender, string action)
-        {
-            if (sender is Button b && b.DataContext is OrderRow r)
-                MessageBox.Show($"{action} {r.Pedido}", "Pedidos");
-        }
-
-        private void ViewOrder_Click(object sender, RoutedEventArgs e) => ShowAction(sender, "Ver");
-        private void EditOrder_Click(object sender, RoutedEventArgs e) => ShowAction(sender, "Editar");
-        private void DuplicateOrder_Click(object sender, RoutedEventArgs e) => ShowAction(sender, "Duplicar");
-        private void DeleteOrder_Click(object sender, RoutedEventArgs e) => ShowAction(sender, "Eliminar");
     }
 
-    public sealed class OrderRow
+    public class Pedido
     {
-        public string Pedido { get; }
-        public string Cliente { get; }
-        public string Fecha { get; }
-        public string Items { get; }
-        public string Total { get; }
-        public string Estado { get; }
+        public string Codigo { get; set; } = string.Empty;
+        public string Cliente { get; set; } = string.Empty;
+        public string Fecha { get; set; } = string.Empty;
+        public string Items { get; set; } = string.Empty;
+        public string Total { get; set; } = string.Empty;
+        public string Estado { get; set; } = string.Empty;
+        public Brush EstadoColor { get; set; } = Brushes.Transparent;
+    }
 
-        public OrderRow(string pedido, string cliente, string fecha, string items, string total, string estado)
+    public class BoolToVisibilityConverter : IValueConverter
+    {
+        public bool Invert { get; set; } = false;
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Pedido = pedido;
-            Cliente = cliente;
-            Fecha = fecha;
-            Items = items;
-            Total = total;
-            Estado = estado;
+            bool isVisible = System.Convert.ToBoolean(value);
+            if (Invert)
+                isVisible = !isVisible;
+
+            return isVisible ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (value is Visibility visibility) && visibility == Visibility.Visible;
         }
     }
 }
