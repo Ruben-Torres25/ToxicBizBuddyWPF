@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ToxicBizBuddyWPF.Views
@@ -8,51 +9,59 @@ namespace ToxicBizBuddyWPF.Views
         public Sidebar()
         {
             InitializeComponent();
-            // Activo inicial
-            SetActive(BtnDashboard);
+            SetActive(BtnDashboard); // activo por defecto
         }
 
+        // Navegación: llamamos al método público del MainWindow
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
-            Navigate("Dashboard");
-            SetActive(BtnDashboard);
+            SetActive((Button)sender);
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Dashboard");
         }
 
-        private void Products_Click(object sender, RoutedEventArgs e)
+        private void Orders_Click(object sender, RoutedEventArgs e)
         {
-            Navigate("Productos");
-            SetActive(BtnProductos);
+            SetActive((Button)sender);
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Orders");
         }
 
         private void Clients_Click(object sender, RoutedEventArgs e)
         {
-            Navigate("Clientes");
-            SetActive(BtnClientes);
+            SetActive((Button)sender);
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Clients");
         }
 
-        private void Navigate(string target)
+        private void Products_Click(object sender, RoutedEventArgs e)
         {
-            if (Window.GetWindow(this) is MainWindow win)
-            {
-                win.NavigateTo(target);
-            }
-        }
-
-        private void SetActive(params Button[] active)
-        {
-            // limpiar
-            BtnDashboard.Tag = null;
-            BtnProductos.Tag = null;
-            BtnClientes.Tag = null;
-
-            foreach (var b in active)
-                b.Tag = "active";
+            SetActive((Button)sender);
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Products");
         }
 
         private void Providers_Click(object sender, RoutedEventArgs e)
         {
-            var mw = (MainWindow)Application.Current.MainWindow;
-            mw.MainFrame.Navigate(new ProvidersPage());
+            SetActive((Button)sender);
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Providers");
+        }
+
+        private void Cash_Click(object sender, RoutedEventArgs e)
+        {
+            SetActive((Button)sender);
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Cash");
+        }
+
+        private void Reports_Click(object sender, RoutedEventArgs e)
+        {
+            SetActive((Button)sender);
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Reports");
+        }
+
+        // Visual activo
+        private void SetActive(Button activeButton)
+        {
+            foreach (var btn in MenuStack.Children.OfType<Button>())
+                btn.Tag = null;
+
+            activeButton.Tag = "active";
         }
     }
 }

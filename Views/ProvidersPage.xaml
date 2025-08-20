@@ -2,79 +2,14 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components"
-      Title="ProvidersPage">
 
-    <!-- Estilos locales (no tocan Styles.xaml) -->
-    <Page.Resources>
-        <!-- Botón outline verde basado en tu BtnPrimary (para conservar template y border-radius) -->
-        <Style x:Key="BtnPrimaryOutlineGreen" TargetType="Button" BasedOn="{StaticResource BtnPrimary}">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="#16A34A"/>
-            <Setter Property="BorderBrush" Value="#86EFAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-        </Style>
 
-        <!-- Tarjeta métrica base -->
-        <Style x:Key="MetricCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
-            <Setter Property="Padding" Value="16"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="BorderBrush" Value="#E5E7F0"/>
-            <Setter Property="Background" Value="#FFFFFF"/>
-        </Style>
-
-        <!-- Métrica verde -->
-        <Style x:Key="MetricCardSuccess" TargetType="Border" BasedOn="{StaticResource MetricCard}">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#E8FBEF" Offset="0"/>
-                        <GradientStop Color="#F4FFF9" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#D6F5E2"/>
-        </Style>
-
-        <!-- Métrica amarilla -->
-        <Style x:Key="MetricCardWarn" TargetType="Border" BasedOn="{StaticResource MetricCard}">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#FFF7E6" Offset="0"/>
-                        <GradientStop Color="#FFFDF6" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#FDE68A"/>
-        </Style>
-
-        <!-- Métrica azul -->
-        <Style x:Key="MetricCardInfo" TargetType="Border" BasedOn="{StaticResource MetricCard}">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#EEF2FF" Offset="0"/>
-                        <GradientStop Color="#F8FAFF" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#E0E7FF"/>
-        </Style>
-
-        <!-- Burbuja de icono -->
-        <Style x:Key="MetricIconPill" TargetType="Border">
-            <Setter Property="CornerRadius" Value="999"/>
-            <Setter Property="Background" Value="#EEF2FF"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-        </Style>
-    </Page.Resources>
+      Title="Proveedores">
 
     <components:PageWrapper>
         <StackPanel Margin="20">
 
-            <!-- Header con dos botones a la derecha -->
+            <!-- Header con dos botones -->
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -88,29 +23,35 @@
                                Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
                 </StackPanel>
 
-                <!-- Registrar Mercadería (outline verde) -->
+                <!-- Registrar Mercadería (ghost/outline verde) -->
                 <Button Grid.Column="1"
-                        Style="{StaticResource BtnPrimary}"
-                        Padding="14,8"
-                        Margin="0,0,8,0">
+                        Padding="10,4"
+                        Margin="0,0,8,0"
+                        Background="White"
+                        Foreground="#16A34A"
+                        BorderBrush="#86EFAC"
+                        BorderThickness="1"
+                        Cursor="Hand"
+                        Click="RegisterStock_Click">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
-                        <TextBlock Text="Registrar Mercadería"/>
+                        <TextBlock Text="Registrar Mercadería" FontWeight="SemiBold"/>
                     </StackPanel>
                 </Button>
 
-                <!-- + Nuevo Proveedor (azul, como BtnPrimary del ejemplo) -->
+                <!-- + Nuevo Proveedor (azul primario) -->
                 <Button Grid.Column="2"
                         Style="{StaticResource BtnPrimary}"
-                        Padding="14,8">
+                        Padding="14,8"
+                        Click="AddProvider_Click">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
-                        <TextBlock Text="Nuevo Proveedor"/>
+                        <TextBlock Text="+ Nuevo Proveedor"/>
                     </StackPanel>
                 </Button>
             </Grid>
 
-            <!-- Métricas -->
+            <!-- Fila de métricas -->
             <Grid Margin="0,0,0,16">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -120,7 +61,7 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Total Proveedores -->
-                <Border Grid.Column="0" Style="{StaticResource MetricCardInfo}" Margin="0,0,12,0">
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,12,0" Padding="16">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -131,14 +72,15 @@
                             <TextBlock Text="24" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"
                                        Foreground="{StaticResource TextStrongBrush}"/>
                         </StackPanel>
-                        <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0">
+                        <Border Grid.Column="1" CornerRadius="999" Background="#EEF2FF" Padding="10" Margin="12,0,0,0"
+                                VerticalAlignment="Top">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#1E40AF"/>
                         </Border>
                     </Grid>
                 </Border>
 
                 <!-- Proveedores Activos -->
-                <Border Grid.Column="1" Style="{StaticResource MetricCardSuccess}" Margin="12,0,12,0">
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="12,0,12,0" Padding="16">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -148,14 +90,15 @@
                             <TextBlock Text="Proveedores Activos" Style="{StaticResource Subtle}"/>
                             <TextBlock Text="18" FontSize="24" FontWeight="Bold" Margin="0,6,0,0" Foreground="#16A34A"/>
                         </StackPanel>
-                        <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0" Background="#E8FFF3">
+                        <Border Grid.Column="1" CornerRadius="999" Background="#E8FFF3" Padding="10" Margin="12,0,0,0"
+                                VerticalAlignment="Top">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#16A34A"/>
                         </Border>
                     </Grid>
                 </Border>
 
                 <!-- Entregas Esta Semana -->
-                <Border Grid.Column="2" Style="{StaticResource MetricCardWarn}" Margin="12,0,12,0">
+                <Border Grid.Column="2" Style="{StaticResource CardStyle}" Margin="12,0,12,0" Padding="16">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -165,14 +108,15 @@
                             <TextBlock Text="Entregas Esta Semana" Style="{StaticResource Subtle}"/>
                             <TextBlock Text="5" FontSize="24" FontWeight="Bold" Margin="0,6,0,0" Foreground="#D97706"/>
                         </StackPanel>
-                        <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0" Background="#FFF7ED">
+                        <Border Grid.Column="1" CornerRadius="999" Background="#FFF7ED" Padding="10" Margin="12,0,0,0"
+                                VerticalAlignment="Top">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#D97706"/>
                         </Border>
                     </Grid>
                 </Border>
 
                 <!-- Productos Suministrados -->
-                <Border Grid.Column="3" Style="{StaticResource MetricCardInfo}" Margin="12,0,0,0">
+                <Border Grid.Column="3" Style="{StaticResource CardStyle}" Margin="12,0,0,0" Padding="16">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -182,7 +126,8 @@
                             <TextBlock Text="Productos Suministrados" Style="{StaticResource Subtle}"/>
                             <TextBlock Text="156" FontSize="24" FontWeight="Bold" Margin="0,6,0,0" Foreground="#1D4ED8"/>
                         </StackPanel>
-                        <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0">
+                        <Border Grid.Column="1" CornerRadius="999" Background="#EEF2FF" Padding="10" Margin="12,0,0,0"
+                                VerticalAlignment="Top">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Foreground="#1D4ED8"/>
                         </Border>
                     </Grid>
@@ -217,7 +162,8 @@
                             Foreground="{StaticResource TextStrongBrush}"
                             BorderBrush="#E5E7F0"
                             BorderThickness="1"
-                            Cursor="Hand">
+                            Cursor="Hand"
+                            Click="OpenFilters_Click">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
                             <TextBlock Text="Filtros"/>
@@ -251,16 +197,16 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Ver" Margin="0,0,6,0">
+                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Ver" Margin="0,0,6,0" Click="ViewProvider_Click">
                                                 <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
                                             </Button>
-                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Editar" Margin="0,0,6,0">
+                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Editar" Margin="0,0,6,0" Click="EditProvider_Click">
                                                 <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
                                             </Button>
-                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Historial" Margin="0,0,6,0">
+                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Historial" Margin="0,0,6,0" Click="HistoryProvider_Click">
                                                 <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
                                             </Button>
-                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Eliminar">
+                                            <Button Style="{StaticResource IconButtonGhost}" ToolTip="Eliminar" Click="DeleteProvider_Click">
                                                 <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
                                             </Button>
                                         </StackPanel>

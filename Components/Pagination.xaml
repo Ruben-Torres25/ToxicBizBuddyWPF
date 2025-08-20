@@ -1,30 +1,38 @@
 ﻿<UserControl x:Class="ToxicBizBuddyWPF.Components.Pagination"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Height="48">
-    <DockPanel LastChildFill="False" Margin="0,12,0,0">
-        <!-- Izquierda: texto -->
-        <TextBlock Text="Mostrando 1–10 de 128"
-               VerticalAlignment="Center"
-               Style="{StaticResource Subtle}"
-               Margin="0,0,12,0"
-               DockPanel.Dock="Left"/>
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Paginación visual (solo UI) -->
+    <StackPanel Orientation="Horizontal"
+              Margin="0,12,0,0"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Center">
+        <Button x:Name="PrevBtn"
+            Padding="8,6"
+            Margin="0,0,8,0"
+            Style="{StaticResource BtnGhost}"
+            Click="PrevBtn_Click">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
+                <TextBlock Text="Anterior"/>
+            </StackPanel>
+        </Button>
 
-        <!-- Derecha: botones -->
-        <StackPanel Orientation="Horizontal"
-                DockPanel.Dock="Right">
-            <Button Style="{StaticResource PaginationButton}"
-              Content=""
-              FontFamily="Segoe MDL2 Assets"
-              ToolTip="Anterior"/>
-            <Button Style="{StaticResource PaginationButton}" Content="1"/>
-            <Button Style="{StaticResource PaginationButton}" Content="2"/>
-            <Button Style="{StaticResource PaginationButton}" Content="3"/>
-            <Button Style="{StaticResource PaginationButton}"
-              Content=""
-              FontFamily="Segoe MDL2 Assets"
-              ToolTip="Siguiente"
-              Margin="4,0,0,0"/>
-        </StackPanel>
-    </DockPanel>
+        <!-- Asegúrate de tener este recurso en Styles.xaml:
+         <SolidColorBrush x:Key="TextSubtleBrush" Color="#6B7280"/> -->
+        <TextBlock x:Name="PageInfo"
+               VerticalAlignment="Center"
+               Margin="0,0,8,0"
+               Foreground="{StaticResource TextSubtleBrush}"
+               Text="Página 1 de 1"/>
+
+        <Button x:Name="NextBtn"
+            Padding="8,6"
+            Style="{StaticResource BtnGhost}"
+            Click="NextBtn_Click">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Siguiente"/>
+                <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="6,0,0,0"/>
+            </StackPanel>
+        </Button>
+    </StackPanel>
 </UserControl>

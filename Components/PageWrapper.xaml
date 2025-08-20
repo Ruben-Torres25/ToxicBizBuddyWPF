@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="ToxicBizBuddyWPF.Components.PageWrapper"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Border Background="#F8FAFC">
+    <Border Background="#F8FAFC" Padding="20">
         <ContentPresenter/>
     </Border>
 </UserControl>

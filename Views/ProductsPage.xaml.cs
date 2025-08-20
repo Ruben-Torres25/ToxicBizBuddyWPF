@@ -13,14 +13,16 @@ namespace ToxicBizBuddyWPF.Views
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new AddProductDialog { Owner = Application.Current.MainWindow };
-            dlg.ShowDialog();
-        }
+            var dlg = new AddProductDialog
+            {
+                Owner = Application.Current.MainWindow
+            };
 
-        private void DeleteProduct_Click(object sender, RoutedEventArgs e)
-        {
-            var dlg = new ConfirmDialog { Owner = Application.Current.MainWindow };
-            dlg.ShowDialog(); // solo visual
+            if (dlg.ShowDialog() == true)
+            {
+                MessageBox.Show("Producto agregado correctamente (visual).");
+                // 🔜 acá refrescarías el DataGrid de productos
+            }
         }
     }
 }

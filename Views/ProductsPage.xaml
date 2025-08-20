@@ -53,7 +53,7 @@
             <Setter Property="BorderBrush" Value="#D6F5E2"/>
         </Style>
 
-        <!-- Burbuja de icono dentro de las métricas -->
+        <!-- Burbuja de icono dentro de las métrricas -->
         <Style x:Key="MetricIconPill" TargetType="Border">
             <Setter Property="CornerRadius" Value="999"/>
             <Setter Property="Background" Value="#EEF2FF"/>
@@ -76,16 +76,18 @@
                 <StackPanel>
                     <TextBlock Text="Gestión de Productos" Style="{StaticResource H1}"/>
                     <TextBlock Text="Controla tu inventario y precios de productos"
-                     Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
+                               Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
                 </StackPanel>
 
                 <Button Grid.Column="1"
-                Padding="10,4"
-                Background="#2563EB"
-                Foreground="White"
-                BorderThickness="0"
-                Cursor="Hand">
-                    <TextBlock Text="+ Nuevo Producto" FontWeight="SemiBold"/>
+                        Style="{StaticResource BtnPrimary}"
+                        Padding="10,6"
+                        Click="AddProduct_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Ícono “agregar” de Segoe MDL2 (mismo que usamos en otras vistas) -->
+                        <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
+                        <TextBlock Text="Agregar producto"/>
+                    </StackPanel>
                 </Button>
             </Grid>
 
@@ -108,7 +110,7 @@
                         <StackPanel>
                             <TextBlock Text="Total Productos" Style="{StaticResource Subtle}"/>
                             <TextBlock Text="156" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"
-                         Foreground="{StaticResource TextStrongBrush}"/>
+                                       Foreground="{StaticResource TextStrongBrush}"/>
                         </StackPanel>
                         <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Margin="12,0,0,0">
                             <TextBlock Text="📦" FontSize="14" VerticalAlignment="Center"/>
@@ -126,7 +128,7 @@
                         <StackPanel>
                             <TextBlock Text="Stock Bajo" Style="{StaticResource Subtle}"/>
                             <TextBlock Text="7" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"
-                         Foreground="#D97706"/>
+                                       Foreground="#D97706"/>
                         </StackPanel>
                         <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Background="#FFF7ED" Margin="12,0,0,0">
                             <TextBlock Text="⚠" FontSize="14" Foreground="#D97706" VerticalAlignment="Center"/>
@@ -144,7 +146,7 @@
                         <StackPanel>
                             <TextBlock Text="Stock Crítico" Style="{StaticResource Subtle}"/>
                             <TextBlock Text="2" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"
-                         Foreground="#DC2626"/>
+                                       Foreground="#DC2626"/>
                         </StackPanel>
                         <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Background="#FFE4E6" Margin="12,0,0,0">
                             <TextBlock Text="⚠" FontSize="14" Foreground="#DC2626" VerticalAlignment="Center"/>
@@ -162,7 +164,7 @@
                         <StackPanel>
                             <TextBlock Text="Valor Inventario" Style="{StaticResource Subtle}"/>
                             <TextBlock Text="€12,450" FontSize="24" FontWeight="Bold" Margin="0,6,0,0"
-                         Foreground="#16A34A"/>
+                                       Foreground="#16A34A"/>
                         </StackPanel>
                         <Border Grid.Column="1" Style="{StaticResource MetricIconPill}" Background="#E8FFF3" Margin="12,0,0,0">
                             <TextBlock Text="🧱" FontSize="14" VerticalAlignment="Center"/>
@@ -188,20 +190,20 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="0,0,8,0"/>
                             <TextBox Grid.Column="1"
-                       Background="Transparent" BorderThickness="0" Padding="0"
-                       Style="{StaticResource InputText}"
-                       ToolTip="Buscar productos por nombre o categoría..."/>
+                                     Background="Transparent" BorderThickness="0" Padding="0"
+                                     Style="{StaticResource InputText}"
+                                     ToolTip="Buscar productos por nombre o categoría..."/>
                         </Grid>
                     </Border>
 
                     <!-- Botón Filtros -->
                     <Button Grid.Column="1"
-                  Padding="10,8"
-                  Background="White"
-                  Foreground="{StaticResource TextStrongBrush}"
-                  BorderBrush="#E5E7F0"
-                  BorderThickness="1"
-                  Cursor="Hand">
+                            Padding="10,8"
+                            Background="White"
+                            Foreground="{StaticResource TextStrongBrush}"
+                            BorderBrush="#E5E7F0"
+                            BorderThickness="1"
+                            Cursor="Hand">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="" FontFamily="Segoe MDL2 Assets" Margin="0,0,6,0"/>
                             <TextBlock Text="Filtros"/>
@@ -217,34 +219,31 @@
                     <Separator Background="{StaticResource DividerBrush}" Height="1" Margin="0,8,0,8"/>
 
                     <DataGrid AutoGenerateColumns="False"
-                    CanUserAddRows="False"
-                    HeadersVisibility="Column"
-                    Padding="4"
-                    Style="{StaticResource DataGridBase}"
-                    ColumnHeaderStyle="{StaticResource DataGridHeader}"
-                    RowStyle="{StaticResource DataGridRowStyle}">
+                              CanUserAddRows="False"
+                              HeadersVisibility="Column"
+                              Padding="4"
+                              Style="{StaticResource DataGridBase}"
+                              ColumnHeaderStyle="{StaticResource DataGridHeader}"
+                              RowStyle="{StaticResource DataGridRowStyle}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Producto"   Binding="{Binding Nombre}"    Width="2*"/>
-                            <DataGridTextColumn Header="Categoría"  Binding="{Binding Categoria}" Width="*" />
+                            <DataGridTextColumn Header="Categoría"  Binding="{Binding Categoria}" Width="*"/>
                             <DataGridTextColumn Header="Precio"     Binding="{Binding Precio}"    Width="120"/>
                             <DataGridTextColumn Header="Stock"      Binding="{Binding Stock}"     Width="150"/>
                             <DataGridTextColumn Header="Estado"     Binding="{Binding Estado}"    Width="140"/>
-                            <DataGridTextColumn Header="Proveedor"  Binding="{Binding Proveedor}" Width="*"  />
+                            <DataGridTextColumn Header="Proveedor"  Binding="{Binding Proveedor}" Width="*"/>
 
                             <!-- Acciones -->
                             <DataGridTemplateColumn Header="Acciones" Width="180">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <!-- Ver -->
                                             <Button Style="{StaticResource IconButtonGhost}" ToolTip="Ver" Margin="0,0,6,0">
                                                 <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
                                             </Button>
-                                            <!-- Editar -->
                                             <Button Style="{StaticResource IconButtonGhost}" ToolTip="Editar" Margin="0,0,6,0">
                                                 <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
                                             </Button>
-                                            <!-- Eliminar -->
                                             <Button Style="{StaticResource IconButtonGhost}" ToolTip="Eliminar">
                                                 <TextBlock Text="" FontFamily="Segoe MDL2 Assets"/>
                                             </Button>
