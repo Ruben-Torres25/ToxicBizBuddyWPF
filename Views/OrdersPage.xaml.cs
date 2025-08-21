@@ -4,36 +4,54 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ToxicBizBuddyWPF.Views
 {
     public partial class OrdersPage : Page
     {
+        private DataGrid? _ordersGridCache;
+
         public OrdersPage()
         {
             InitializeComponent();
-            // Datos de ejemplo para ver el layout como en el mock
-            OrdersGrid.ItemsSource = GetSampleOrders();
+            Loaded += OrdersPage_Loaded;
         }
 
-        private static IList<OrderRow> GetSampleOrders() => new List<OrderRow>
+        private void OrdersPage_Loaded(object? sender, RoutedEventArgs e)
         {
-            new OrderRow("PED001","María García", new DateTime(2024,1,8), 3, 450.00m, "Completado"),
-            new OrderRow("PED002","Carlos López", new DateTime(2024,1,8), 2, 230.50m, "Pendiente"),
-            new OrderRow("PED003","Ana Rodríguez", new DateTime(2024,1,7), 5, 680.00m, "Pendiente"),
-            new OrderRow("PED004","Luis Martín", new DateTime(2024,1,7), 2, 320.75m, "Cancelado")
+            _ordersGridCache ??= FindOrdersGrid(this);
+            if (_ordersGridCache != null)
+                _ordersGridCache.ItemsSource = GetSampleOrders();
+        }
+
+        private static DataGrid? FindOrdersGrid(DependencyObject root)
+        {
+            if (root is DataGrid dg && (dg.Tag as string) == "OrdersGridRef")
+                return dg;
+
+            int count = VisualTreeHelper.GetChildrenCount(root);
+            for (int i = 0; i < count; i++)
+            {
+                var found = FindOrdersGrid(VisualTreeHelper.GetChild(root, i));
+                if (found != null) return found;
+            }
+            return null;
+        }
+
+        private static List<OrderRow> GetSampleOrders() => new()
+        {
+            new("PED001","María García", new DateTime(2024,1,8), 3, 450.00m, "Completado"),
+            new("PED002","Carlos López", new DateTime(2024,1,8), 2, 230.50m, "Pendiente"),
+            new("PED003","Ana Rodríguez", new DateTime(2024,1,7), 5, 680.00m, "Pendiente"),
+            new("PED004","Luis Martín", new DateTime(2024,1,7), 2, 320.75m, "Cancelado")
         };
 
-        // ===== Botones =====
         private void NewOrder_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Nuevo pedido (visual)", "Pedidos");
-        }
+            => MessageBox.Show("Nuevo pedido (visual)", "Pedidos");
 
         private void OpenFilters_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Abrir filtros (visual)", "Pedidos");
-        }
+            => MessageBox.Show("Abrir filtros (visual)", "Pedidos");
 
         private void OpenOrderLink_Click(object sender, MouseButtonEventArgs e)
         {
@@ -69,7 +87,7 @@ namespace ToxicBizBuddyWPF.Views
             Fecha = fecha.ToString("yyyy-MM-dd");
             Items = items == 1 ? "1 item" : $"{items} items";
             Total = total.ToString("$0.00", CultureInfo.InvariantCulture);
-            Estado = estado; // "Completado" | "Pendiente" | "Cancelado"
+            Estado = estado;
         }
     }
 }
