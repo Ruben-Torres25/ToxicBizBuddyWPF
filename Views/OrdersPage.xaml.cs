@@ -25,6 +25,13 @@ namespace ToxicBizBuddyWPF.Views
                 _ordersGridCache.ItemsSource = GetSampleOrders();
         }
 
+        // Evita resaltado/selección persistente
+        private void OrdersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is DataGrid dg)
+                dg.SelectedIndex = -1;
+        }
+
         private static DataGrid? FindOrdersGrid(DependencyObject root)
         {
             if (root is DataGrid dg && (dg.Tag as string) == "OrdersGridRef")
@@ -87,7 +94,7 @@ namespace ToxicBizBuddyWPF.Views
             Fecha = fecha.ToString("yyyy-MM-dd");
             Items = items == 1 ? "1 item" : $"{items} items";
             Total = total.ToString("$0.00", CultureInfo.InvariantCulture);
-            Estado = estado;
+            Estado = estado; // "Completado" | "Pendiente" | "Cancelado"
         }
     }
 }
