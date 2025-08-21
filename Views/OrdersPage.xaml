@@ -4,10 +4,8 @@
       xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components"
       Title="Gestión de Pedidos">
 
-    <!-- ===== Estilos LOCALES, seguros (no usan PlaceholderText ni CornerRadius en Button) ===== -->
+    <!-- ===== Estilos locales (igual a los que venías usando) ===== -->
     <Page.Resources>
-
-        <!-- Card base (si ya existe CardStyle global, podés borrar esto) -->
         <Style x:Key="CardStyle" TargetType="Border">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="#E5E7EB"/>
@@ -16,7 +14,6 @@
             <Setter Property="Padding" Value="16"/>
         </Style>
 
-        <!-- Botón primario -->
         <Style x:Key="BtnPrimary" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="#2563EB"/>
@@ -38,7 +35,6 @@
             </Setter>
         </Style>
 
-        <!-- Botón fantasma -->
         <Style x:Key="BtnGhost" TargetType="Button">
             <Setter Property="Foreground" Value="#111827"/>
             <Setter Property="Background" Value="White"/>
@@ -60,7 +56,6 @@
             </Setter>
         </Style>
 
-        <!-- Botón icono -->
         <Style x:Key="IconButtonGhost" TargetType="Button">
             <Setter Property="Width" Value="34"/>
             <Setter Property="Height" Value="34"/>
@@ -83,13 +78,10 @@
             </Setter>
         </Style>
 
-        <!-- Iconos MDL2 -->
         <Style x:Key="Icon" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-
-        <!-- Títulos -->
         <Style x:Key="H1" TargetType="TextBlock">
             <Setter Property="FontSize" Value="28"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -105,14 +97,12 @@
             <Setter Property="Foreground" Value="#0F172A"/>
         </Style>
 
-        <!-- Enlace azul del número de pedido -->
         <Style x:Key="OrderLink" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#2563EB"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
 
-        <!-- Badges -->
         <Style x:Key="BadgeBase" TargetType="Border">
             <Setter Property="CornerRadius" Value="999"/>
             <Setter Property="Padding" Value="8,4"/>
@@ -132,7 +122,6 @@
             <Setter Property="BorderBrush" Value="#FECACA"/>
         </Style>
 
-        <!-- DataGrid base -->
         <Style x:Key="DataGridBase" TargetType="DataGrid">
             <Setter Property="HeadersVisibility" Value="Column"/>
             <Setter Property="GridLinesVisibility" Value="None"/>
@@ -184,7 +173,7 @@
         </Style>
     </Page.Resources>
 
-    <!-- ENVUELTO EN PageWrapper (usa tu componente existente) -->
+    <!-- Usamos los UserControls -->
     <components:PageWrapper>
         <Grid Background="#F8FAFF">
             <Grid.RowDefinitions>
@@ -192,7 +181,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
-                <!-- paginación -->
             </Grid.RowDefinitions>
 
             <!-- Header -->
@@ -256,13 +244,13 @@
                                Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
                     <Separator Background="#E5E7EB" Height="1" Margin="0,8,0,8"/>
 
-                    <DataGrid x:Name="OrdersGrid"
+                    <!-- Importante: usar Tag para evitar NameScope -->
+                    <DataGrid Tag="OrdersGridRef"
                               AutoGenerateColumns="False"
                               CanUserAddRows="False"
+                              ColumnHeaderStyle="{StaticResource DataGridHeader}"
                               Style="{StaticResource DataGridBase}">
                         <DataGrid.Columns>
-
-                            <!-- Pedido (link) -->
                             <DataGridTemplateColumn Header="Pedido" Width="140">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -273,19 +261,11 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Cliente -->
                             <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente}" Width="2*"/>
-
-                            <!-- Fecha -->
                             <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" Width="160"/>
-
-                            <!-- Items -->
                             <DataGridTextColumn Header="Items" Binding="{Binding Items}" Width="120"/>
-
-                            <!-- Total -->
                             <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="140"/>
 
-                            <!-- Estado (badge dinámico) -->
                             <DataGridTemplateColumn Header="Estado" Width="200">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -341,7 +321,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Acciones -->
                             <DataGridTemplateColumn Header="Acciones" Width="220">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -362,13 +341,12 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
             </Border>
 
-            <!-- Paginación (tu componente existente) -->
+            <!-- Paginación -->
             <StackPanel Grid.Row="3" Margin="24,0,24,16" HorizontalAlignment="Right">
                 <components:Pagination/>
             </StackPanel>

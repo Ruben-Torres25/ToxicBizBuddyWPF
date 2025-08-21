@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="ToxicBizBuddyWPF.Components.PageWrapper"
+             x:ClassModifier="public"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!-- Contenedor con fondo neutro y padding general -->
