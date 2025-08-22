@@ -4,7 +4,6 @@
       xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components"
       Title="Gestión de Pedidos">
 
-    <!-- ================== ESTILOS LOCALES ================== -->
     <Page.Resources>
 
         <!-- Card -->
@@ -112,7 +111,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <!-- Badges (ultra bajos y centrados) -->
+        <!-- Badges ultra bajos -->
         <Style x:Key="BadgeSquareBase" TargetType="Border">
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -123,7 +122,6 @@
             <Setter Property="Background" Value="#E6FAF1"/>
             <Setter Property="BorderBrush" Value="#B9F2DC"/>
             <Setter Property="Padding" Value="1,0"/>
-            <!-- bajo -->
             <Setter Property="Margin" Value="0"/>
         </Style>
         <Style x:Key="BadgePendingUltra" TargetType="Border" BasedOn="{StaticResource BadgeSquareBase}">
@@ -190,7 +188,7 @@
             </Setter>
         </Style>
 
-        <!-- Encabezado/celda con separación mínima -->
+        <!-- Header/celdas compactos -->
         <Style x:Key="FlatDataGridHeader" TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Foreground" Value="#0F172A"/>
@@ -200,10 +198,17 @@
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <!-- centrado vertical header -->
+        </Style>
+        <Style x:Key="LeftHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource FlatDataGridHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="CenterHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource FlatDataGridHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="RightHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource FlatDataGridHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
         </Style>
 
-        <!-- Fila sin selección -->
         <Style x:Key="FlatDataGridRow" TargetType="DataGridRow">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Focusable" Value="False"/>
@@ -243,7 +248,6 @@
             </Setter>
         </Style>
 
-        <!-- Celda compacta y centrada vertical -->
         <Style x:Key="FlatDataGridCell" TargetType="DataGridCell">
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Padding" Value="2,0"/>
@@ -251,7 +255,8 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <!-- clave -->
+            <!-- Evita que el contenido se dibuje fuera de su propia columna -->
+            <Setter Property="ClipToBounds" Value="True"/>
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="Transparent"/>
@@ -261,9 +266,7 @@
         </Style>
 
     </Page.Resources>
-    <!-- ================== /ESTILOS LOCALES ================== -->
 
-    <!-- ENVUELTO EN TU USERCONTROL -->
     <components:PageWrapper>
         <Grid Background="#F8FAFF">
             <Grid.RowDefinitions>
@@ -281,8 +284,7 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel>
                     <TextBlock Text="Gestión de Pedidos" Style="{StaticResource H1}"/>
-                    <TextBlock Text="Administra todos los pedidos de tus clientes"
-                               Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
+                    <TextBlock Text="Administra todos los pedidos de tus clientes" Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
                 </StackPanel>
                 <Button Grid.Column="1" Style="{StaticResource BtnPrimary}" Click="NewOrder_Click">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -300,16 +302,14 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Border CornerRadius="8" BorderBrush="#E5E7EB" BorderThickness="1"
-                            Background="White" Padding="10" Margin="0,0,8,0">
+                    <Border CornerRadius="8" BorderBrush="#E5E7EB" BorderThickness="1" Background="White" Padding="10" Margin="0,0,8,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource Icon}" Text="&#xE721;" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                            <TextBox Grid.Column="1" BorderThickness="0" Background="Transparent"
-                                     Tag="Buscar por cliente o número de pedido…"/>
+                            <TextBox Grid.Column="1" BorderThickness="0" Background="Transparent" Tag="Buscar por cliente o número de pedido…"/>
                         </Grid>
                     </Border>
                     <Button Grid.Column="1" Style="{StaticResource BtnGhost}" Click="OpenFilters_Click">
@@ -327,7 +327,6 @@
                     <TextBlock Text="Lista de Pedidos" Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
                     <Separator Background="#E5E7EB" Height="1" Margin="0,8,0,8"/>
 
-                    <!-- SIMETRÍA: todas las columnas = 1* -->
                     <DataGrid Tag="OrdersGridRef"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
@@ -336,21 +335,23 @@
                               GridLinesVisibility="None"
                               RowStyle="{StaticResource FlatDataGridRow}"
                               CellStyle="{StaticResource FlatDataGridCell}"
-                              ColumnHeaderStyle="{StaticResource FlatDataGridHeader}"
                               Style="{StaticResource DataGridBase}"
+                              ColumnHeaderStyle="{StaticResource FlatDataGridHeader}"
                               SelectionChanged="OrdersGrid_SelectionChanged"
-
                               ColumnWidth="*"
                               HorizontalScrollBarVisibility="Auto"
                               CanUserResizeColumns="False">
 
                         <DataGrid.Columns>
-                            <!-- Mismos anchos; MinWidth evita solapamientos -->
-                            <DataGridTemplateColumn Header="Pedido" Width="1*" MinWidth="80">
+
+                            <!-- Pedido -->
+                            <DataGridTemplateColumn Header="Pedido" Width="1.2*" MinWidth="90"
+                                                    HeaderStyle="{StaticResource LeftHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Pedido}"
                                                    Style="{StaticResource OrderLink}"
+                                                   TextAlignment="Left"
                                                    VerticalAlignment="Center"
                                                    TextTrimming="CharacterEllipsis"
                                                    MouseLeftButtonDown="OpenOrderLink_Click"/>
@@ -358,42 +359,67 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Cliente" Width="1*" MinWidth="140">
+                            <!-- Cliente -->
+                            <DataGridTemplateColumn Header="Cliente" Width="1.6*" MinWidth="150"
+                                                    HeaderStyle="{StaticResource LeftHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Cliente}"
+                                                   TextAlignment="Left"
                                                    VerticalAlignment="Center"
                                                    TextTrimming="CharacterEllipsis"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Fecha" Width="1*" MinWidth="100">
+                            <!-- Fecha -->
+                            <DataGridTemplateColumn Header="Fecha" Width="1.2*" MinWidth="110"
+                                                    HeaderStyle="{StaticResource CenterHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Fecha}"
                                                    Foreground="#64748B"
+                                                   TextAlignment="Center"
                                                    VerticalAlignment="Center"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTextColumn Header="Items" Binding="{Binding Items}" Width="1*" MinWidth="70"/>
+                            <!-- Items -->
+                            <DataGridTemplateColumn Header="Items" Width="1.0*" MinWidth="80"
+                                                    HeaderStyle="{StaticResource CenterHeader}">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Items}"
+                                                   TextAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   TextTrimming="CharacterEllipsis"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Total" Width="1*" MinWidth="80">
+                            <!-- Total -->
+                            <DataGridTemplateColumn Header="Total" Width="1.7*" MinWidth="130"
+                                                    HeaderStyle="{StaticResource RightHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Total}"
                                                    FontWeight="SemiBold"
-                                                   VerticalAlignment="Center"/>
+                                                   TextAlignment="Right"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,12,0"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Estado" Width="1*" MinWidth="100">
+                            <!-- Estado -->
+                            <DataGridTemplateColumn Header="Estado" Width="1.9*" MinWidth="130"
+                                                    HeaderStyle="{StaticResource CenterHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Border Style="{StaticResource BadgeCompletedUltra}" VerticalAlignment="Center">
+                                        <Border Style="{StaticResource BadgeCompletedUltra}"
+                                                VerticalAlignment="Center"
+                                                Margin="12,0,0,0">
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                                 <TextBlock Style="{StaticResource BadgeIcon}" Text="&#xE73E;"/>
                                                 <TextBlock Style="{StaticResource BadgeText}" Text="{Binding Estado}" VerticalAlignment="Center"/>
@@ -403,11 +429,12 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Misma estrella para simetría; MinWidth alto para botones -->
-                            <DataGridTemplateColumn Header="Acciones" Width="1*" MinWidth="200">
+                            <!-- Acciones -->
+                            <DataGridTemplateColumn Header="Acciones" Width="1.5*" MinWidth="200"
+                                                    HeaderStyle="{StaticResource CenterHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                             <Button Style="{StaticResource IconButtonGhostSm}" ToolTip="Ver" Click="ViewOrder_Click">
                                                 <TextBlock Style="{StaticResource Icon}" Text="&#xE8F4;" VerticalAlignment="Center"/>
                                             </Button>
@@ -424,6 +451,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
