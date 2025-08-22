@@ -7,7 +7,7 @@
     <!-- ================== ESTILOS LOCALES ================== -->
     <Page.Resources>
 
-        <!-- Card base -->
+        <!-- Card -->
         <Style x:Key="CardStyle" TargetType="Border">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="#E5E7EB"/>
@@ -105,26 +105,25 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="#0F172A"/>
         </Style>
-
-        <!-- Link -->
         <Style x:Key="OrderLink" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#2563EB"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
-        <!-- Badges cuadrados ULTRA delicados (más bajos y centrados) -->
+        <!-- Badges (ultra bajos y centrados) -->
         <Style x:Key="BadgeSquareBase" TargetType="Border">
             <Setter Property="CornerRadius" Value="4"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
-        <!-- VERDE aún más bajo -->
         <Style x:Key="BadgeCompletedUltra" TargetType="Border" BasedOn="{StaticResource BadgeSquareBase}">
             <Setter Property="Background" Value="#E6FAF1"/>
             <Setter Property="BorderBrush" Value="#B9F2DC"/>
             <Setter Property="Padding" Value="1,0"/>
+            <!-- bajo -->
             <Setter Property="Margin" Value="0"/>
         </Style>
         <Style x:Key="BadgePendingUltra" TargetType="Border" BasedOn="{StaticResource BadgeSquareBase}">
@@ -146,6 +145,7 @@
         <Style x:Key="BadgeIcon" TargetType="TextBlock" BasedOn="{StaticResource Icon}">
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="Margin" Value="0,0,4,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
         <!-- DataGrid base -->
@@ -190,15 +190,17 @@
             </Setter>
         </Style>
 
-        <!-- Encabezado compacto: separaciones menores -->
+        <!-- Encabezado/celda con separación mínima -->
         <Style x:Key="FlatDataGridHeader" TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="White"/>
             <Setter Property="Foreground" Value="#0F172A"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Padding" Value="3,0"/>
-            <!-- antes 6,0 -->
+            <Setter Property="Padding" Value="2,0"/>
             <Setter Property="BorderBrush" Value="#EAECEF"/>
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <!-- centrado vertical header -->
         </Style>
 
         <!-- Fila sin selección -->
@@ -222,7 +224,6 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="Auto"/>
                                     </SelectiveScrollingGrid.RowDefinitions>
-
                                     <DataGridCellsPresenter Grid.Column="1" Grid.Row="0"
                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                     <Border Grid.ColumnSpan="2" Grid.Row="1" Height="1" Background="#EAECEF"/>
@@ -242,13 +243,15 @@
             </Setter>
         </Style>
 
-        <!-- Celda compacta: separaciones menores -->
+        <!-- Celda compacta y centrada vertical -->
         <Style x:Key="FlatDataGridCell" TargetType="DataGridCell">
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="3,0"/>
-            <!-- antes 6,0 -->
+            <Setter Property="Padding" Value="2,0"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <!-- clave -->
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="Transparent"/>
@@ -276,17 +279,15 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-
                 <StackPanel>
                     <TextBlock Text="Gestión de Pedidos" Style="{StaticResource H1}"/>
                     <TextBlock Text="Administra todos los pedidos de tus clientes"
                                Style="{StaticResource Subtle}" Margin="0,4,0,0"/>
                 </StackPanel>
-
                 <Button Grid.Column="1" Style="{StaticResource BtnPrimary}" Click="NewOrder_Click">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource Icon}" Text="&#xE710;" Margin="0,0,8,0"/>
-                        <TextBlock Text="Nuevo Pedido"/>
+                        <TextBlock Text="Nuevo Pedido" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -299,7 +300,6 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-
                     <Border CornerRadius="8" BorderBrush="#E5E7EB" BorderThickness="1"
                             Background="White" Padding="10" Margin="0,0,8,0">
                         <Grid>
@@ -308,30 +308,26 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Style="{StaticResource Icon}" Text="&#xE721;" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                            <TextBox Grid.Column="1"
-                                     BorderThickness="0"
-                                     Background="Transparent"
+                            <TextBox Grid.Column="1" BorderThickness="0" Background="Transparent"
                                      Tag="Buscar por cliente o número de pedido…"/>
                         </Grid>
                     </Border>
-
                     <Button Grid.Column="1" Style="{StaticResource BtnGhost}" Click="OpenFilters_Click">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <TextBlock Style="{StaticResource Icon}" Text="&#xE16E;" Margin="0,0,8,0"/>
-                            <TextBlock Text="Filtros"/>
+                            <TextBlock Text="Filtros" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                 </Grid>
             </Border>
 
-            <!-- Lista -->
+            <!-- Tabla -->
             <Border Grid.Row="2" Margin="24" Style="{StaticResource CardStyle}">
                 <StackPanel>
-                    <TextBlock Text="Lista de Pedidos"
-                               Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
+                    <TextBlock Text="Lista de Pedidos" Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
                     <Separator Background="#E5E7EB" Height="1" Margin="0,8,0,8"/>
 
-                    <!-- DataGrid: columnas alineadas y separaciones menores -->
+                    <!-- SIMETRÍA: todas las columnas = 1* -->
                     <DataGrid Tag="OrdersGridRef"
                               IsReadOnly="True"
                               AutoGenerateColumns="False"
@@ -344,14 +340,13 @@
                               Style="{StaticResource DataGridBase}"
                               SelectionChanged="OrdersGrid_SelectionChanged"
 
-                              ColumnWidth="Auto"
+                              ColumnWidth="*"
                               HorizontalScrollBarVisibility="Auto"
                               CanUserResizeColumns="False">
 
                         <DataGrid.Columns>
-
-                            <!-- Pedido -->
-                            <DataGridTemplateColumn Header="Pedido" Width="Auto" MinWidth="100">
+                            <!-- Mismos anchos; MinWidth evita solapamientos -->
+                            <DataGridTemplateColumn Header="Pedido" Width="1*" MinWidth="80">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Pedido}"
@@ -363,8 +358,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Cliente (flex ocupa sobrante) -->
-                            <DataGridTemplateColumn Header="Cliente" Width="*" MinWidth="180">
+                            <DataGridTemplateColumn Header="Cliente" Width="1*" MinWidth="140">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Cliente}"
@@ -374,8 +368,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Fecha -->
-                            <DataGridTemplateColumn Header="Fecha" Width="Auto" MinWidth="120">
+                            <DataGridTemplateColumn Header="Fecha" Width="1*" MinWidth="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Fecha}"
@@ -385,14 +378,9 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Items -->
-                            <DataGridTextColumn Header="Items"
-                                                Binding="{Binding Items}"
-                                                Width="Auto"
-                                                MinWidth="90"/>
+                            <DataGridTextColumn Header="Items" Binding="{Binding Items}" Width="1*" MinWidth="70"/>
 
-                            <!-- Total -->
-                            <DataGridTemplateColumn Header="Total" Width="Auto" MinWidth="100">
+                            <DataGridTemplateColumn Header="Total" Width="1*" MinWidth="80">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Total}"
@@ -402,84 +390,40 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Estado (verde más bajo y centrado) -->
-                            <DataGridTemplateColumn Header="Estado" Width="Auto" MinWidth="120">
+                            <DataGridTemplateColumn Header="Estado" Width="1*" MinWidth="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <ContentControl Content="{Binding Estado}">
-                                            <ContentControl.Style>
-                                                <Style TargetType="ContentControl">
-                                                    <Setter Property="ContentTemplate">
-                                                        <Setter.Value>
-                                                            <DataTemplate>
-                                                                <Border Style="{StaticResource BadgeCompletedUltra}">
-                                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                        <TextBlock Style="{StaticResource BadgeIcon}" Text="&#xE73E;"/>
-                                                                        <TextBlock Style="{StaticResource BadgeText}" Text="Completado"/>
-                                                                    </StackPanel>
-                                                                </Border>
-                                                            </DataTemplate>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding}" Value="Pendiente">
-                                                            <Setter Property="ContentTemplate">
-                                                                <Setter.Value>
-                                                                    <DataTemplate>
-                                                                        <Border Style="{StaticResource BadgePendingUltra}">
-                                                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                                <TextBlock Style="{StaticResource BadgeIcon}" Text="&#xE823;"/>
-                                                                                <TextBlock Style="{StaticResource BadgeText}" Text="Pendiente"/>
-                                                                            </StackPanel>
-                                                                        </Border>
-                                                                    </DataTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding}" Value="Cancelado">
-                                                            <Setter Property="ContentTemplate">
-                                                                <Setter.Value>
-                                                                    <DataTemplate>
-                                                                        <Border Style="{StaticResource BadgeCanceledUltra}">
-                                                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                                                <TextBlock Style="{StaticResource BadgeIcon}" Text="&#xE711;"/>
-                                                                                <TextBlock Style="{StaticResource BadgeText}" Text="Cancelado"/>
-                                                                            </StackPanel>
-                                                                        </Border>
-                                                                    </DataTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ContentControl.Style>
-                                        </ContentControl>
+                                        <Border Style="{StaticResource BadgeCompletedUltra}" VerticalAlignment="Center">
+                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                <TextBlock Style="{StaticResource BadgeIcon}" Text="&#xE73E;"/>
+                                                <TextBlock Style="{StaticResource BadgeText}" Text="{Binding Estado}" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Acciones -->
-                            <DataGridTemplateColumn Header="Acciones" Width="210" MinWidth="210">
+                            <!-- Misma estrella para simetría; MinWidth alto para botones -->
+                            <DataGridTemplateColumn Header="Acciones" Width="1*" MinWidth="200">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Button Style="{StaticResource IconButtonGhostSm}" ToolTip="Ver" Click="ViewOrder_Click">
-                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE8F4;"/>
+                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE8F4;" VerticalAlignment="Center"/>
                                             </Button>
                                             <Button Style="{StaticResource IconButtonGhostSm}" ToolTip="Editar" Click="EditOrder_Click">
-                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE70F;"/>
+                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE70F;" VerticalAlignment="Center"/>
                                             </Button>
                                             <Button Style="{StaticResource IconButtonGhostSm}" ToolTip="Duplicar" Click="DuplicateOrder_Click">
-                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE8C8;"/>
+                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE8C8;" VerticalAlignment="Center"/>
                                             </Button>
                                             <Button Style="{StaticResource IconButtonGhostSm}" ToolTip="Eliminar" Click="DeleteOrder_Click" Margin="0">
-                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE74D;"/>
+                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE74D;" VerticalAlignment="Center"/>
                                             </Button>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

@@ -25,7 +25,7 @@ namespace ToxicBizBuddyWPF.Views
                 _ordersGridCache.ItemsSource = GetSampleOrders();
         }
 
-        // Evita resaltado/selección persistente
+        // Evita resaltado/selección visual
         private void OrdersGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is DataGrid dg)
@@ -48,10 +48,10 @@ namespace ToxicBizBuddyWPF.Views
 
         private static List<OrderRow> GetSampleOrders() => new()
         {
-            new("PED001","María García", new DateTime(2024,1,8), 3, 450.00m, "Completado"),
+            new("PED001","María García", new DateTime(2024,1,8), 3, 450000.00m, "Completado"),
             new("PED002","Carlos López", new DateTime(2024,1,8), 2, 230.50m, "Pendiente"),
             new("PED003","Ana Rodríguez", new DateTime(2024,1,7), 5, 680.00m, "Pendiente"),
-            new("PED004","Luis Martín", new DateTime(2024,1,7), 2, 320.75m, "Cancelado")
+            new("PED0004","Luis Martín", new DateTime(2024,1,7), 42, 3200000.75m, "Cancelado")
         };
 
         private void NewOrder_Click(object sender, RoutedEventArgs e)
