@@ -322,140 +322,145 @@
             </Border>
 
             <!-- Tabla -->
+            <!-- Lista de Pedidos -->
             <Border Grid.Row="2" Margin="24" Style="{StaticResource CardStyle}">
                 <StackPanel>
                     <TextBlock Text="Lista de Pedidos" Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
                     <Separator Background="#E5E7EB" Height="1" Margin="0,8,0,8"/>
 
                     <DataGrid Tag="OrdersGridRef"
-                              IsReadOnly="True"
-                              AutoGenerateColumns="False"
-                              CanUserAddRows="False"
-                              HeadersVisibility="Column"
-                              GridLinesVisibility="None"
-                              RowStyle="{StaticResource FlatDataGridRow}"
-                              CellStyle="{StaticResource FlatDataGridCell}"
-                              Style="{StaticResource DataGridBase}"
-                              ColumnHeaderStyle="{StaticResource FlatDataGridHeader}"
-                              SelectionChanged="OrdersGrid_SelectionChanged"
-                              ColumnWidth="*"
-                              HorizontalScrollBarVisibility="Auto"
-                              CanUserResizeColumns="False">
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="None"
+                  RowStyle="{StaticResource FlatDataGridRow}"
+                  CellStyle="{StaticResource FlatDataGridCell}"
+                  Style="{StaticResource DataGridBase}"
+                  ColumnHeaderStyle="{StaticResource FlatDataGridHeader}"
+                  SelectionChanged="OrdersGrid_SelectionChanged"
+                  ColumnWidth="*"
+                  HorizontalScrollBarVisibility="Auto"
+                  CanUserResizeColumns="False">
 
                         <DataGrid.Columns>
-
                             <!-- Pedido -->
-                            <DataGridTemplateColumn Header="Pedido" Width="1.2*" MinWidth="90"
-                                                    HeaderStyle="{StaticResource LeftHeader}">
+                            <DataGridTemplateColumn Header="Pedido" Width="*" MinWidth="100"
+                                        HeaderStyle="{StaticResource LeftHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Pedido}"
-                                                   Style="{StaticResource OrderLink}"
-                                                   TextAlignment="Left"
-                                                   VerticalAlignment="Center"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   MouseLeftButtonDown="OpenOrderLink_Click"/>
+                                       Style="{StaticResource OrderLink}"
+                                       FontSize="14"
+                                       TextAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"
+                                       MouseLeftButtonDown="OpenOrderLink_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
                             <!-- Cliente -->
-                            <DataGridTemplateColumn Header="Cliente" Width="1.6*" MinWidth="150"
-                                                    HeaderStyle="{StaticResource LeftHeader}">
+                            <DataGridTemplateColumn Header="Cliente" Width="*" MinWidth="140"
+                                        HeaderStyle="{StaticResource LeftHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Cliente}"
-                                                   TextAlignment="Left"
-                                                   VerticalAlignment="Center"
-                                                   TextTrimming="CharacterEllipsis"/>
+                                       FontSize="14"
+                                       TextAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
                             <!-- Fecha -->
-                            <DataGridTemplateColumn Header="Fecha" Width="1.2*" MinWidth="110"
-                                                    HeaderStyle="{StaticResource CenterHeader}">
+                            <DataGridTemplateColumn Header="Fecha" Width="*" MinWidth="110"
+                                        HeaderStyle="{StaticResource CenterHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Fecha}"
-                                                   Foreground="#64748B"
-                                                   TextAlignment="Center"
-                                                   VerticalAlignment="Center"/>
+                                       FontSize="14"
+                                       Foreground="#64748B"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
                             <!-- Items -->
-                            <DataGridTemplateColumn Header="Items" Width="1.0*" MinWidth="80"
-                                                    HeaderStyle="{StaticResource CenterHeader}">
+                            <DataGridTemplateColumn Header="Items" Width="*" MinWidth="90"
+                                        HeaderStyle="{StaticResource CenterHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Items}"
-                                                   TextAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   TextTrimming="CharacterEllipsis"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-                            <!-- Total -->
-                            <DataGridTemplateColumn Header="Total" Width="1.7*" MinWidth="130"
-                                                    HeaderStyle="{StaticResource RightHeader}">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Total}"
-                                                   FontWeight="SemiBold"
-                                                   TextAlignment="Right"
-                                                   VerticalAlignment="Center"
-                                                   Margin="0,0,12,0"/>
+                                       FontSize="14"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
                             <!-- Estado -->
-                            <DataGridTemplateColumn Header="Estado" Width="1.9*" MinWidth="130"
-                                                    HeaderStyle="{StaticResource CenterHeader}">
+                            <DataGridTemplateColumn Header="Estado" Width="*" MinWidth="120"
+                                        HeaderStyle="{StaticResource CenterHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Border Style="{StaticResource BadgeCompletedUltra}"
-                                                VerticalAlignment="Center"
-                                                Margin="12,0,0,0">
+                                    VerticalAlignment="Center"
+                                    Margin="0,0,8,0">
                                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                <TextBlock Style="{StaticResource BadgeIcon}" Text="&#xE73E;"/>
-                                                <TextBlock Style="{StaticResource BadgeText}" Text="{Binding Estado}" VerticalAlignment="Center"/>
+                                                <TextBlock Style="{StaticResource BadgeIcon}" FontSize="14" Text="&#xE73E;"/>
+                                                <TextBlock Style="{StaticResource BadgeText}" FontSize="14" Text="{Binding Estado}" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Border>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
+                            <!-- Total -->
+                            <DataGridTemplateColumn Header="Total" Width="*" MinWidth="130"
+                                        HeaderStyle="{StaticResource CenterHeader}">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Total}"
+                                       FontWeight="SemiBold"
+                                       FontSize="14"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Margin="8,0,0,0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
                             <!-- Acciones -->
-                            <DataGridTemplateColumn Header="Acciones" Width="1.5*" MinWidth="200"
-                                                    HeaderStyle="{StaticResource CenterHeader}">
+                            <DataGridTemplateColumn Header="Acciones" Width="*" MinWidth="200"
+                                        HeaderStyle="{StaticResource CenterHeader}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                             <Button Style="{StaticResource IconButtonGhostSm}" ToolTip="Ver" Click="ViewOrder_Click">
-                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE8F4;" VerticalAlignment="Center"/>
+                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE8F4;" FontSize="14" VerticalAlignment="Center"/>
                                             </Button>
                                             <Button Style="{StaticResource IconButtonGhostSm}" ToolTip="Editar" Click="EditOrder_Click">
-                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE70F;" VerticalAlignment="Center"/>
+                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE70F;" FontSize="14" VerticalAlignment="Center"/>
                                             </Button>
                                             <Button Style="{StaticResource IconButtonGhostSm}" ToolTip="Duplicar" Click="DuplicateOrder_Click">
-                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE8C8;" VerticalAlignment="Center"/>
+                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE8C8;" FontSize="14" VerticalAlignment="Center"/>
                                             </Button>
                                             <Button Style="{StaticResource IconButtonGhostSm}" ToolTip="Eliminar" Click="DeleteOrder_Click" Margin="0">
-                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE74D;" VerticalAlignment="Center"/>
+                                                <TextBlock Style="{StaticResource Icon}" Text="&#xE74D;" FontSize="14" VerticalAlignment="Center"/>
                                             </Button>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
             </Border>
+
 
             <!-- Paginación -->
             <StackPanel Grid.Row="3" Margin="24,0,24,16" HorizontalAlignment="Right">
