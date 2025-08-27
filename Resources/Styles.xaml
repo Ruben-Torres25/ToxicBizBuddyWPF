@@ -501,6 +501,252 @@
     </Style>
     <!-- Color de texto sutil (gris) -->
     <SolidColorBrush x:Key="TextSubtleBrush" Color="#6B7280"/>
+    <!-- ========================= -->
+    <!--  Orders.* (solo agregar) -->
+    <!-- ========================= -->
+
+    <!-- Brush divisor idéntico al de la página -->
+    <SolidColorBrush x:Key="Orders.DividerBrush" Color="#E5E7EB"/>
+
+    <!-- Tipografía/Icono (MDL2) -->
+    <Style x:Key="Orders.Icon" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Card igual a la de la página (Padding 16, borde gris) -->
+    <Style x:Key="Orders.CardStyle" TargetType="Border">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#E5E7EB"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="16"/>
+    </Style>
+
+    <!-- BtnGhost (blanco, borde) como en la página -->
+    <Style x:Key="Orders.BtnGhost" TargetType="Button">
+        <Setter Property="Foreground" Value="#111827"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Padding" Value="10,6"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderBrush" Value="#E5E7EB"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Icon buttons (ghost) -->
+    <Style x:Key="Orders.IconButtonGhost" TargetType="Button">
+        <Setter Property="Width" Value="34"/>
+        <Setter Property="Height" Value="34"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#E5E7EB"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="8">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Orders.IconButtonGhostSm" TargetType="Button" BasedOn="{StaticResource Orders.IconButtonGhost}">
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Margin" Value="0,0,8,0"/>
+    </Style>
+
+    <!-- Textos/títulos iguales a los de la página (ya tenés H1/Subtle globales; no los duplico) -->
+
+    <!-- Enlace de pedido (azul subrayable) -->
+    <Style x:Key="Orders.OrderLink" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#2563EB"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="TextDecorations" Value="Underline"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Badges -->
+    <Style x:Key="Orders.BadgeSquareBase" TargetType="Border">
+        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="Orders.BadgeCompletedUltra" TargetType="Border" BasedOn="{StaticResource Orders.BadgeSquareBase}">
+        <Setter Property="Background" Value="#E6FAF1"/>
+        <Setter Property="BorderBrush" Value="#B9F2DC"/>
+        <Setter Property="Padding" Value="1,0"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <Style x:Key="Orders.BadgePendingUltra" TargetType="Border" BasedOn="{StaticResource Orders.BadgeSquareBase}">
+        <Setter Property="Background" Value="#FFF6D6"/>
+        <Setter Property="BorderBrush" Value="#FFE29B"/>
+        <Setter Property="Padding" Value="2,0"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <Style x:Key="Orders.BadgeCanceledUltra" TargetType="Border" BasedOn="{StaticResource Orders.BadgeSquareBase}">
+        <Setter Property="Background" Value="#FFE2E2"/>
+        <Setter Property="BorderBrush" Value="#FFB8B8"/>
+        <Setter Property="Padding" Value="2,0"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
+    <Style x:Key="Orders.BadgeText" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="Orders.BadgeIcon" TargetType="TextBlock" BasedOn="{StaticResource Orders.Icon}">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="0,0,4,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- DataGrid (exacto al de la página) -->
+    <Style x:Key="Orders.DataGridBase" TargetType="DataGrid">
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="GridLinesVisibility" Value="None"/>
+        <Setter Property="RowBackground" Value="White"/>
+        <Setter Property="AlternatingRowBackground" Value="White"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="RowHeight" Value="44"/>
+        <Setter Property="ColumnHeaderHeight" Value="36"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="#E5E7EB"/>
+        <Setter Property="VerticalGridLinesBrush" Value="#E5E7EB"/>
+        <Setter Property="SelectionUnit" Value="FullRow"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGrid">
+                    <Border Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="8">
+                        <ScrollViewer x:Name="DG_ScrollViewer">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="ScrollViewer">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Background="White" Height="36">
+                                            <DataGridColumnHeadersPresenter/>
+                                        </Grid>
+                                        <ScrollContentPresenter Grid.Row="1"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Headers + filas + celdas (compactos) -->
+    <Style x:Key="Orders.FlatDataGridHeader" TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="#0F172A"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Padding" Value="2,0"/>
+        <Setter Property="BorderBrush" Value="#EAECEF"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="Orders.LeftHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource Orders.FlatDataGridHeader}">
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    </Style>
+    <Style x:Key="Orders.CenterHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource Orders.FlatDataGridHeader}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+    <Style x:Key="Orders.RightHeader" TargetType="DataGridColumnHeader" BasedOn="{StaticResource Orders.FlatDataGridHeader}">
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+    </Style>
+
+    <Style x:Key="Orders.FlatDataGridRow" TargetType="DataGridRow">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridRow">
+                    <Border x:Name="RowRoot" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <SelectiveScrollingGrid>
+                                <SelectiveScrollingGrid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </SelectiveScrollingGrid.ColumnDefinitions>
+                                <SelectiveScrollingGrid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </SelectiveScrollingGrid.RowDefinitions>
+                                <DataGridCellsPresenter Grid.Column="1" Grid.Row="0"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                <Border Grid.ColumnSpan="2" Grid.Row="1" Height="1" Background="#EAECEF"/>
+                            </SelectiveScrollingGrid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="RowRoot" Property="Background" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="RowRoot" Property="Background" Value="#FAFBFF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Orders.FlatDataGridCell" TargetType="DataGridCell">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="2,0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="#0F172A"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
 </ResourceDictionary>
