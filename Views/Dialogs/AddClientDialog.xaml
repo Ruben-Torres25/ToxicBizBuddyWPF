@@ -1,156 +1,122 @@
-﻿<Window x:Class="ToxicBizBuddyWPF.Views.Dialogs.AddClientDialog"
+<dialogs:DialogBase x:Class="ToxicBizBuddyWPF.Views.Dialogs.AddClientDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dialogs="clr-namespace:ToxicBizBuddyWPF.Views.Dialogs"
         Title="Agregar cliente"
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        AllowsTransparency="True"
-        Background="Transparent"
-        WindowStartupLocation="CenterOwner"
-        WindowState="Maximized"
-        ShowInTaskbar="False"
-        Topmost="True">
+        CardWidth="640">
+    <StackPanel>
+        <!-- Formulario -->
+        <Grid Margin="0,8,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Nombre -->
+                <RowDefinition Height="Auto"/>
+                <!-- Tipo cliente / Documento -->
+                <RowDefinition Height="Auto"/>
+                <!-- Teléfono / Email -->
+                <RowDefinition Height="Auto"/>
+                <!-- Dirección / Localidad -->
+                <RowDefinition Height="Auto"/>
+                <!-- Provincia / Condición de pago -->
+                <RowDefinition Height="Auto"/>
+                <!-- Límite crédito / Descuento -->
+                <RowDefinition Height="Auto"/>
+                <!-- Observaciones -->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-    <Grid Background="#80000000">
-        <Border Style="{StaticResource CardStyle}" Width="640" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel>
-
-                <!-- Header -->
-                <Grid Margin="0,0,0,12">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Agregar cliente" Style="{StaticResource H1}" FontSize="20" VerticalAlignment="Center"/>
-                    <Button Grid.Column="1"
-                  Content="✕"
-                  Width="34" Height="34"
-                  Background="Transparent"
-                  BorderThickness="0"
-                  Cursor="Hand"
-                  HorizontalAlignment="Right"
-                  ToolTip="Cerrar"
-                  Click="Close_Click"/>
-                </Grid>
-
-                <!-- Formulario -->
-                <Grid Margin="0,8,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <!-- Nombre -->
-                        <RowDefinition Height="Auto"/>
-                        <!-- Tipo cliente / Documento -->
-                        <RowDefinition Height="Auto"/>
-                        <!-- Teléfono / Email -->
-                        <RowDefinition Height="Auto"/>
-                        <!-- Dirección / Localidad -->
-                        <RowDefinition Height="Auto"/>
-                        <!-- Provincia / Condición de pago -->
-                        <RowDefinition Height="Auto"/>
-                        <!-- Límite crédito / Descuento -->
-                        <RowDefinition Height="Auto"/>
-                        <!-- Observaciones -->
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Nombre / Razón social -->
-                    <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,10">
-                        <TextBlock Text="Nombre / Razón social" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}" ToolTip="Campo obligatorio"/>
-                    </StackPanel>
-
-                    <!-- Tipo de cliente -->
-                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,8,10">
-                        <TextBlock Text="Tipo de cliente" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="4">
-                            <ComboBox BorderThickness="0" Background="Transparent" Padding="4,2">
-                                <ComboBoxItem Content="Seleccionar..." IsSelected="True"/>
-                                <ComboBoxItem Content="Consumidor final"/>
-                                <ComboBoxItem Content="Empresa"/>
-                                <ComboBoxItem Content="Revendedor"/>
-                            </ComboBox>
-                        </Border>
-                    </StackPanel>
-
-                    <!-- Documento -->
-                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="8,0,0,10">
-                        <TextBlock Text="Documento (DNI/CUIT)" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}"/>
-                    </StackPanel>
-
-                    <!-- Teléfono -->
-                    <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,8,10">
-                        <TextBlock Text="Teléfono" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}" ToolTip="Preferible celular"/>
-                    </StackPanel>
-
-                    <!-- Email -->
-                    <StackPanel Grid.Row="2" Grid.Column="1" Margin="8,0,0,10">
-                        <TextBlock Text="Email" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}"/>
-                    </StackPanel>
-
-                    <!-- Dirección -->
-                    <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,8,10">
-                        <TextBlock Text="Dirección (calle, número)" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}"/>
-                    </StackPanel>
-
-                    <!-- Localidad -->
-                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="8,0,0,10">
-                        <TextBlock Text="Localidad" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}"/>
-                    </StackPanel>
-
-                    <!-- Provincia -->
-                    <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,0,8,10">
-                        <TextBlock Text="Provincia" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}"/>
-                    </StackPanel>
-
-                    <!-- Condición de pago -->
-                    <StackPanel Grid.Row="4" Grid.Column="1" Margin="8,0,0,10">
-                        <TextBlock Text="Condición de pago" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="4">
-                            <ComboBox BorderThickness="0" Background="Transparent" Padding="4,2">
-                                <ComboBoxItem Content="Contado" IsSelected="True"/>
-                                <ComboBoxItem Content="Crédito"/>
-                            </ComboBox>
-                        </Border>
-                    </StackPanel>
-
-                    <!-- Límite de crédito -->
-                    <StackPanel Grid.Row="5" Grid.Column="0" Margin="0,0,8,10">
-                        <TextBlock Text="Límite de crédito" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}" ToolTip="Si aplica"/>
-                    </StackPanel>
-
-                    <!-- Descuento (%) -->
-                    <StackPanel Grid.Row="5" Grid.Column="1" Margin="8,0,0,10">
-                        <TextBlock Text="Descuento (%)" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}" ToolTip="Si aplica"/>
-                    </StackPanel>
-
-                    <!-- Observaciones -->
-                    <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Margin="0,0,0,0">
-                        <TextBlock Text="Observaciones" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
-                        <TextBox Style="{StaticResource InputText}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
-                    </StackPanel>
-
-                </Grid>
-
-                <!-- Footer -->
-                <!-- Footer -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
-                    <Button Content="Cancelar" Style="{StaticResource BtnGhost}" Click="Close_Click"/>
-                    <Button Content="Guardar"  Style="{StaticResource BtnPrimary}" Margin="12,0,0,0" Click="Save_Click"/>
-                </StackPanel>
-
-
+            <!-- Nombre / Razón social -->
+            <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,0,10">
+                <TextBlock Text="Nombre / Razón social" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}" ToolTip="Campo obligatorio"/>
             </StackPanel>
-        </Border>
-    </Grid>
-</Window>
+
+            <!-- Tipo de cliente -->
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,8,10">
+                <TextBlock Text="Tipo de cliente" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="4">
+                    <ComboBox BorderThickness="0" Background="Transparent" Padding="4,2">
+                        <ComboBoxItem Content="Seleccionar..." IsSelected="True"/>
+                        <ComboBoxItem Content="Consumidor final"/>
+                        <ComboBoxItem Content="Empresa"/>
+                        <ComboBoxItem Content="Revendedor"/>
+                    </ComboBox>
+                </Border>
+            </StackPanel>
+
+            <!-- Documento -->
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="8,0,0,10">
+                <TextBlock Text="Documento (DNI/CUIT)" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}"/>
+            </StackPanel>
+
+            <!-- Teléfono -->
+            <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,8,10">
+                <TextBlock Text="Teléfono" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}" ToolTip="Preferible celular"/>
+            </StackPanel>
+
+            <!-- Email -->
+            <StackPanel Grid.Row="2" Grid.Column="1" Margin="8,0,0,10">
+                <TextBlock Text="Email" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}"/>
+            </StackPanel>
+
+            <!-- Dirección -->
+            <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,8,10">
+                <TextBlock Text="Dirección (calle, número)" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}"/>
+            </StackPanel>
+
+            <!-- Localidad -->
+            <StackPanel Grid.Row="3" Grid.Column="1" Margin="8,0,0,10">
+                <TextBlock Text="Localidad" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}"/>
+            </StackPanel>
+
+            <!-- Provincia -->
+            <StackPanel Grid.Row="4" Grid.Column="0" Margin="0,0,8,10">
+                <TextBlock Text="Provincia" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}"/>
+            </StackPanel>
+
+            <!-- Condición de pago -->
+            <StackPanel Grid.Row="4" Grid.Column="1" Margin="8,0,0,10">
+                <TextBlock Text="Condición de pago" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <Border Background="White" BorderBrush="{StaticResource Slate200Brush}" BorderThickness="1" CornerRadius="8" Padding="4">
+                    <ComboBox BorderThickness="0" Background="Transparent" Padding="4,2">
+                        <ComboBoxItem Content="Contado" IsSelected="True"/>
+                        <ComboBoxItem Content="Crédito"/>
+                    </ComboBox>
+                </Border>
+            </StackPanel>
+
+            <!-- Límite de crédito -->
+            <StackPanel Grid.Row="5" Grid.Column="0" Margin="0,0,8,10">
+                <TextBlock Text="Límite de crédito" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}" ToolTip="Si aplica"/>
+            </StackPanel>
+
+            <!-- Descuento (%) -->
+            <StackPanel Grid.Row="5" Grid.Column="1" Margin="8,0,0,10">
+                <TextBlock Text="Descuento (%)" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}" ToolTip="Si aplica"/>
+            </StackPanel>
+
+            <!-- Observaciones -->
+            <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Margin="0,0,0,0">
+                <TextBlock Text="Observaciones" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                <TextBox Style="{StaticResource InputText}" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Footer -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Cancelar" Style="{StaticResource BtnGhost}" Click="Close_Click"/>
+            <Button Content="Guardar"  Style="{StaticResource BtnPrimary}" Margin="12,0,0,0" Click="Save_Click"/>
+        </StackPanel>
+    </StackPanel>
+</dialogs:DialogBase>

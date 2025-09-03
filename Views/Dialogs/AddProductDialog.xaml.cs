@@ -1,19 +1,13 @@
-﻿using System;
+using System;
 using System.Windows;
 
 namespace ToxicBizBuddyWPF.Views.Dialogs
 {
-    public partial class AddProductDialog : Window
+    public partial class AddProductDialog : DialogBase
     {
         public AddProductDialog()
         {
             InitializeComponent();
-        }
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-            Close();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
