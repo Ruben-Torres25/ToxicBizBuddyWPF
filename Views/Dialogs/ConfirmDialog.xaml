@@ -1,9 +1,7 @@
-<dialogs:DialogBase x:Class="ToxicBizBuddyWPF.Views.Dialogs.ConfirmDialog"
+<Window x:Class="ToxicBizBuddyWPF.Views.Dialogs.ConfirmDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:dialogs="clr-namespace:ToxicBizBuddyWPF.Views.Dialogs"
-        Title="¿Eliminar elemento?"
-        CardWidth="440">
+        Title="¿Eliminar elemento?">
     <StackPanel>
         <!-- Mensaje -->
         <TextBlock Text="Esta acción no se puede deshacer."
@@ -17,4 +15,4 @@
             <Button Content="Eliminar" Style="{StaticResource BtnDestructive}" Margin="12,0,0,0" Click="Confirm_Click"/>
         </StackPanel>
     </StackPanel>
-</dialogs:DialogBase>
+</Window>

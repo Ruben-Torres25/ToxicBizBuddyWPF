@@ -7,6 +7,7 @@ namespace ToxicBizBuddyWPF.Views.Dialogs
         public ConfirmDialog()
         {
             InitializeComponent();
+            CardWidth = 440;
         }
 
         private void Confirm_Click(object sender, RoutedEventArgs e)
