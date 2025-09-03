@@ -748,5 +748,68 @@
         </Style.Triggers>
     </Style>
 
+    <!-- ========= ALIAS PARA COMPATIBILIDAD EN ORDERS/OTRAS PÁGINAS ========= -->
+    <!-- Mapean los nombres usados en algunas vistas al look&feel global definido arriba -->
+
+    <!-- Encabezado de columnas (alias) -->
+    <Style x:Key="FlatDataGridHeader"
+           TargetType="DataGridColumnHeader"
+           BasedOn="{StaticResource DataGridHeader}" />
+
+    <!-- Variantes de alineación (alias) -->
+    <Style x:Key="LeftHeader"
+           TargetType="DataGridColumnHeader"
+           BasedOn="{StaticResource FlatDataGridHeader}">
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    </Style>
+
+    <Style x:Key="CenterHeader"
+           TargetType="DataGridColumnHeader"
+           BasedOn="{StaticResource FlatDataGridHeader}">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="RightHeader"
+           TargetType="DataGridColumnHeader"
+           BasedOn="{StaticResource FlatDataGridHeader}">
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+    </Style>
+
+    <!-- Fila (alias) -->
+    <Style x:Key="FlatDataGridRow"
+           TargetType="DataGridRow"
+           BasedOn="{StaticResource DataGridRowStyle}" />
+
+    <!-- Celda (mínimo seguro). Si más adelante definís una celda global, 
+         podés cambiar este BasedOn a ese estilo -->
+    <Style x:Key="FlatDataGridCell" TargetType="DataGridCell">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="2,0"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="ClipToBounds" Value="True"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- (Opcional) Si alguna vista hace referencia a Orders.FlatDataGridHeader/Row/Cell 
+         aseguramos compatibilidad también con esos nombres -->
+    <Style x:Key="Orders.FlatDataGridHeader"
+           TargetType="DataGridColumnHeader"
+           BasedOn="{StaticResource DataGridHeader}" />
+    <Style x:Key="Orders.FlatDataGridRow"
+           TargetType="DataGridRow"
+           BasedOn="{StaticResource DataGridRowStyle}" />
+    <Style x:Key="Orders.FlatDataGridCell"
+           TargetType="DataGridCell"
+           BasedOn="{StaticResource FlatDataGridCell}" />
+    <!-- ========= FIN ALIAS ========= -->
+
 
 </ResourceDictionary>

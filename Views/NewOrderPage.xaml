@@ -1,0 +1,214 @@
+﻿<Page x:Class="ToxicBizBuddyWPF.Views.NewOrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Nuevo Pedido">
+
+    <!-- Usa estilos globales: BtnPrimary, CardStyle, H1, Subtle, IconButtonGhost, etc. -->
+
+    <Grid Background="#F7F8FF" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Encabezado -->
+        <TextBlock Grid.Row="0"
+                   Text="Completa los datos para crear un nuevo pedido"
+                   Style="{StaticResource Subtle}"
+                   FontSize="16"
+                   Margin="4,0,0,16"/>
+
+        <!-- Contenido principal -->
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1.6*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- IZQUIERDA -->
+            <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,16,0">
+
+                <!-- Información del Pedido -->
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="Información del Pedido" Style="{StaticResource H1}" Margin="0,0,0,12"/>
+
+                        <!-- Cliente -->
+                        <TextBlock Text="Cliente" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                        <ComboBox Height="42"
+                                  Padding="10"
+                                  ItemsSource="{Binding Clients}"
+                                  SelectedItem="{Binding SelectedClient}"
+                                  BorderBrush="#E5E7EB" />
+
+                        <!-- Condición de venta -->
+                        <TextBlock Text="Condición de Venta" Style="{StaticResource Subtle}" Margin="0,12,0,4"/>
+                        <ComboBox Height="42"
+                                  Padding="10"
+                                  ItemsSource="{Binding SaleConditions}"
+                                  SelectedItem="{Binding SelectedSaleCondition}"
+                                  BorderBrush="#E5E7EB" />
+
+                        <!-- Fecha de entrega -->
+                        <TextBlock Text="Fecha de Entrega" Style="{StaticResource Subtle}" Margin="0,12,0,4"/>
+                        <DatePicker Height="42"
+                                    SelectedDate="{Binding DeliveryDate}"
+                                    BorderBrush="#E5E7EB"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Agregar Producto -->
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="Agregar Producto" Style="{StaticResource H1}" Margin="0,0,0,12"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2.2*"/>
+                                <ColumnDefinition Width="0.8*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Producto -->
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Producto" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                                <ComboBox Height="42"
+                                          Padding="10"
+                                          ItemsSource="{Binding Products}"
+                                          SelectedItem="{Binding EditorSelectedProduct}"
+                                          DisplayMemberPath="Name"
+                                          BorderBrush="#E5E7EB"/>
+                            </StackPanel>
+
+                            <!-- Cantidad -->
+                            <StackPanel Grid.Column="1" Margin="12,0,12,0">
+                                <TextBlock Text="Cantidad" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                                <TextBox Height="42"
+                                         Padding="10"
+                                         Text="{Binding EditorQuantity, UpdateSourceTrigger=PropertyChanged}"
+                                         HorizontalContentAlignment="Right"
+                                         PreviewTextInput="NumberOnly"
+                                         BorderBrush="#3B82F6"
+                                         BorderThickness="2"/>
+                            </StackPanel>
+
+                            <!-- Descuento % -->
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Descuento (%)" Style="{StaticResource Subtle}" Margin="0,0,0,4"/>
+                                <TextBox Height="42"
+                                         Padding="10"
+                                         Text="{Binding EditorDiscountPercent, UpdateSourceTrigger=PropertyChanged}"
+                                         HorizontalContentAlignment="Right"
+                                         PreviewTextInput="NumberOnly"
+                                         BorderBrush="#E5E7EB"/>
+                            </StackPanel>
+                        </Grid>
+                        
+                        <!-- Botón agregar -->
+                        <Button Margin="0,12,0,0"
+                                Padding="12,8"
+                                Background="#2563EB"
+                                Foreground="White"
+                                BorderBrush="#1D4ED8"
+                                BorderThickness="1"
+                                Cursor="Hand"
+                                Click="AddItem_Click">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Margin="0,0,8,0"/>
+                                <TextBlock Text="Agregar Producto"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <!-- Lista de Productos -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Lista de Productos" Style="{StaticResource H1}" Margin="0,0,0,12"/>
+                        
+                        <DataGrid ItemsSource="{Binding Items}"
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  HeadersVisibility="Column"
+                                  Style="{StaticResource DataGridBase}"
+                                  ColumnHeaderStyle="{StaticResource DataGridHeader}"
+                                  RowStyle="{StaticResource DataGridRowStyle}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Código" Binding="{Binding Product.Id}" Width="120"/>
+                                <DataGridTextColumn Header="Nombre del Producto" Binding="{Binding Product.Name}" Width="*"/>
+                                <DataGridTextColumn Header="Cantidad" Binding="{Binding Quantity}" Width="100"/>
+                                <DataGridTextColumn Header="Precio Unitario" Binding="{Binding UnitPrice, StringFormat={}{0:C2}}" Width="140"/>
+                                <DataGridTextColumn Header="Descuento" Binding="{Binding DiscountPercent, StringFormat={}{0}%}" Width="120"/>
+                                <DataGridTextColumn Header="Precio Sumado" Binding="{Binding LineTotal, StringFormat={}{0:C2}}" Width="140"/>
+
+                                <!-- Acciones -->
+                                <DataGridTemplateColumn Header="Acciones" Width="80">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Style="{StaticResource IconButtonGhost}"
+                                                    ToolTip="Eliminar"
+                                                    Click="RemoveItem_Click"
+                                                    Tag="{Binding}">
+                                                <TextBlock FontFamily="Segoe MDL2 Assets" Text=""/>
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- DERECHA: Resumen -->
+            <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                <StackPanel>
+                    <TextBlock Text="Resumen del Pedido" Style="{StaticResource H1}" Margin="0,0,0,12"/>
+
+                    <Grid Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Subtotal:" Style="{StaticResource Subtle}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Subtotal, StringFormat={}{0:C2}}"/>
+
+                        <TextBlock Grid.Column="0" Text="Descuento general (10%):" Style="{StaticResource Subtle}" Margin="0,24,0,0"/>
+                        <TextBlock Grid.Column="1"
+                                   Margin="0,24,0,0"
+                                   Foreground="#DC2626"
+                                   Text="{Binding GeneralDiscount, StringFormat={}{0:C2}}"/>
+                    </Grid>
+
+                    <Separator Background="#E5E7EB" Height="1" Margin="0,6,0,8"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="Total:" FontWeight="Bold" />
+                        <TextBlock Grid.Column="1" Text="{Binding Total, StringFormat={}{0:C2}}" FontWeight="Bold" />
+                    </Grid>
+
+                    <Button Style="{StaticResource BtnPrimary}" Padding="12,10" Click="CreateOrder_Click" Margin="0,0,0,8">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" Text="" Margin="0,0,8,0"/>
+                            <TextBlock Text="Crear Pedido"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Padding="12,10"
+                            Background="White"
+                            Foreground="{StaticResource TextStrongBrush}"
+                            BorderBrush="#E5E7EB"
+                            BorderThickness="1"
+                            Click="Cancel_Click">
+                        <TextBlock Text="Cancelar"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

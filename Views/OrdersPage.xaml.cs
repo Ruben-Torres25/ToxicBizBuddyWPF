@@ -55,7 +55,10 @@ namespace ToxicBizBuddyWPF.Views
         };
 
         private void NewOrder_Click(object sender, RoutedEventArgs e)
-            => MessageBox.Show("Nuevo pedido (visual)", "Pedidos");
+        {
+            NavigationService?.Navigate(new NewOrderPage());
+        }
+
 
         private void OpenFilters_Click(object sender, RoutedEventArgs e)
             => MessageBox.Show("Abrir filtros (visual)", "Pedidos");
