@@ -9,48 +9,20 @@
 
     <!-- Estilos locales de esta página -->
     <Page.Resources>
-        <!-- Tarjeta métrica base -->
-        <Style x:Key="MetricCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
-            <Setter Property="Padding" Value="16"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="BorderBrush" Value="#E5E7F0"/>
-            <Setter Property="Background" Value="#FFFFFF"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/MetricStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-        <!-- Métrica verde (Saldo a favor) -->
-        <Style x:Key="MetricCardSuccess" TargetType="Border" BasedOn="{StaticResource MetricCard}">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#E8FBEF" Offset="0"/>
-                        <GradientStop Color="#F4FFF9" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#D6F5E2"/>
-        </Style>
-
-        <!-- Métrica roja (Deudas) -->
-        <Style x:Key="MetricCardDanger" TargetType="Border" BasedOn="{StaticResource MetricCard}">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#FEECEC" Offset="0"/>
-                        <GradientStop Color="#FFF5F5" Offset="1"/>
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="BorderBrush" Value="#F9D3D3"/>
-        </Style>
-
-        <!-- Burbuja de icono dentro de las métricas -->
-        <Style x:Key="MetricIconPill" TargetType="Border">
-            <Setter Property="CornerRadius" Value="999"/>
-            <Setter Property="Background" Value="#EEF2FF"/>
-            <Setter Property="Padding" Value="10"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-        </Style>
+            <!-- Burbuja de icono dentro de las métricas -->
+            <Style x:Key="MetricIconPill" TargetType="Border">
+                <Setter Property="CornerRadius" Value="999"/>
+                <Setter Property="Background" Value="#EEF2FF"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+        </ResourceDictionary>
     </Page.Resources>
 
     <components:PageWrapper>
