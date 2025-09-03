@@ -1,7 +1,7 @@
 ﻿<Page x:Class="ToxicBizBuddyWPF.Views.ProductsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components;assembly=ToxicBizBuddyWPF"
+      xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components"
       Title="ProductsPage">
 
     <!-- Estilos locales de esta página -->
