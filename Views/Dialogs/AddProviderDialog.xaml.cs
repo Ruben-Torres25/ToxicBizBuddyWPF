@@ -7,6 +7,7 @@ namespace ToxicBizBuddyWPF.Views.Dialogs
         public AddProviderDialog()
         {
             InitializeComponent();
+            CardWidth = 640;
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)

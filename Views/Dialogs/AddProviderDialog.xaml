@@ -1,9 +1,7 @@
-<dialogs:DialogBase x:Class="ToxicBizBuddyWPF.Views.Dialogs.AddProviderDialog"
+<Window x:Class="ToxicBizBuddyWPF.Views.Dialogs.AddProviderDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:dialogs="clr-namespace:ToxicBizBuddyWPF.Views.Dialogs"
-        Title="Nuevo proveedor"
-        CardWidth="640">
+        Title="Nuevo proveedor">
     <StackPanel>
         <!-- Formulario -->
         <Grid Margin="0,8,0,0">
@@ -124,4 +122,4 @@
             <Button Content="Guardar" Style="{StaticResource BtnPrimary}" Margin="12,0,0,0" Click="Save_Click"/>
         </StackPanel>
     </StackPanel>
-</dialogs:DialogBase>
+</Window>
