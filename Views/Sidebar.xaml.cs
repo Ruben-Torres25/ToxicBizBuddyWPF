@@ -16,8 +16,8 @@ namespace ToxicBizBuddyWPF.Views
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
-            var route = button.Tag as string;
-            (Application.Current.MainWindow as MainWindow)?.NavigateTo(route);
+            if (button.Tag is string route)
+                (Application.Current.MainWindow as MainWindow)?.NavigateTo(route);
             SetActive(button);
         }
 
