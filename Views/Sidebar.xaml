@@ -43,7 +43,7 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="Pill" Property="Background" Value="#EFF6FF"/>
                             </Trigger>
-                            <Trigger Property="Tag" Value="active">
+                            <Trigger Property="Uid" Value="active">
                                 <Setter TargetName="Pill" Property="Background" Value="#2563EB"/>
                                 <Setter Property="Foreground" Value="White"/>
                                 <Setter TargetName="Pill" Property="Effect">
@@ -84,49 +84,49 @@
             <!-- Menú -->
             <StackPanel x:Name="MenuStack" Margin="16,10,16,0">
 
-                <Button x:Name="BtnDashboard" Style="{StaticResource SidebarNavButton}" Click="Dashboard_Click" Tag="active">
+                <Button x:Name="BtnDashboard" Style="{StaticResource SidebarNavButton}" Click="Menu_Click" Tag="Dashboard" Uid="active">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource SidebarIcon}" Text="&#xE80F;"/>
                         <TextBlock Text="Dashboard"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="BtnOrders" Style="{StaticResource SidebarNavButton}" Click="Orders_Click">
+                <Button x:Name="BtnOrders" Style="{StaticResource SidebarNavButton}" Click="Menu_Click" Tag="Orders">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource SidebarIcon}" Text="&#xE7BF;"/>
                         <TextBlock Text="Pedidos"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="BtnClients" Style="{StaticResource SidebarNavButton}" Click="Clients_Click">
+                <Button x:Name="BtnClients" Style="{StaticResource SidebarNavButton}" Click="Menu_Click" Tag="Clients">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource SidebarIcon}" Text="&#xE77B;"/>
                         <TextBlock Text="Clientes"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="BtnProducts" Style="{StaticResource SidebarNavButton}" Click="Products_Click">
+                <Button x:Name="BtnProducts" Style="{StaticResource SidebarNavButton}" Click="Menu_Click" Tag="Products">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource SidebarIcon}" Text="&#xE719;"/>
                         <TextBlock Text="Productos"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="BtnProviders" Style="{StaticResource SidebarNavButton}" Click="Providers_Click">
+                <Button x:Name="BtnProviders" Style="{StaticResource SidebarNavButton}" Click="Menu_Click" Tag="Providers">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource SidebarIcon}" Text="&#xE7FC;"/>
                         <TextBlock Text="Proveedores"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="BtnCash" Style="{StaticResource SidebarNavButton}" Click="Cash_Click">
+                <Button x:Name="BtnCash" Style="{StaticResource SidebarNavButton}" Click="Menu_Click" Tag="Cash">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource SidebarIcon}" Text="&#xE719;"/>
                         <TextBlock Text="Caja"/>
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="BtnReports" Style="{StaticResource SidebarNavButton}" Click="Reports_Click">
+                <Button x:Name="BtnReports" Style="{StaticResource SidebarNavButton}" Click="Menu_Click" Tag="Reports">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource SidebarIcon}" Text="&#xE9D9;"/>
                         <TextBlock Text="Reportes"/>
