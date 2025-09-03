@@ -77,23 +77,13 @@ namespace ToxicBizBuddyWPF.Views
         }
     }
 
-    public sealed class OrderRow
+    public sealed class OrderRow(string pedido, string cliente, DateTime fecha, int items, decimal total, string estado)
     {
-        public string Pedido { get; }
-        public string Cliente { get; }
-        public DateTime Fecha { get; }
-        public int Items { get; }
-        public decimal Total { get; }
-        public string Estado { get; }
-
-        public OrderRow(string pedido, string cliente, DateTime fecha, int items, decimal total, string estado)
-        {
-            Pedido = pedido;
-            Cliente = cliente;
-            Fecha = fecha;
-            Items = items;
-            Total = total;
-            Estado = estado; // "Completado" | "Pendiente" | "Cancelado"
-        }
+        public string Pedido { get; } = pedido;
+        public string Cliente { get; } = cliente;
+        public DateTime Fecha { get; } = fecha;
+        public int Items { get; } = items;
+        public decimal Total { get; } = total;
+        public string Estado { get; } = estado; // "Completado" | "Pendiente" | "Cancelado"
     }
 }
