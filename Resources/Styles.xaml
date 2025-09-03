@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- ===== Paleta base ===== -->
@@ -35,72 +35,6 @@
         <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}"/>
     </Style>
 
-    <!-- ===== Card ===== -->
-    <Style x:Key="CardStyle" TargetType="Border">
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="CornerRadius" Value="12"/>
-        <Setter Property="Padding" Value="20"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Slate200Brush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <!-- Si querés sombra y tenés ShadowEffect en App.xaml, activá:
-    <Setter Property="Effect" Value="{StaticResource ShadowEffect}"/>
-    -->
-    </Style>
-
-    <!-- ===== Botones ===== -->
-    <Style x:Key="BtnPrimary" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Padding" Value="10,6"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}"
-                  CornerRadius="8"
-                  Padding="{TemplateBinding Padding}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="BtnGhost" TargetType="Button" BasedOn="{StaticResource BtnPrimary}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
-    </Style>
-
-    <!-- ===== DataGrid ===== -->
-    <Style x:Key="DataGridBase" TargetType="DataGrid">
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="GridLinesVisibility" Value="None"/>
-        <Setter Property="RowHeight" Value="36"/>
-        <Setter Property="ColumnHeaderHeight" Value="36"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="AlternatingRowBackground" Value="{StaticResource Slate100Brush}"/>
-        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource Slate200Brush}"/>
-        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource Slate200Brush}"/>
-    </Style>
-
-    <Style x:Key="DataGridHeader" TargetType="DataGridColumnHeader">
-        <Setter Property="Background" Value="{StaticResource Slate100Brush}"/>
-        <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="BorderBrush" Value="{StaticResource Slate200Brush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-        <Setter Property="Padding" Value="8,0"/>
-    </Style>
-
-    <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
-        <Setter Property="BorderBrush" Value="{StaticResource Slate100Brush}"/>
-        <Setter Property="BorderThickness" Value="0,0,0,1"/>
-    </Style>
-
     <!-- ===== Badge ===== -->
     <Style x:Key="Badge" TargetType="ContentControl">
         <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
@@ -116,95 +50,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <!-- ===== Sidebar Button ===== -->
-    <Style x:Key="SidebarButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="#1F2937"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="Padding" Value="10"/>
-        <Setter Property="Margin" Value="0,5,0,0"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="8">
-                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#E0F2FE"/>
-            </Trigger>
-            <!-- Dejar este trigger al final para que prevalezca -->
-            <Trigger Property="Tag" Value="active">
-                <Setter Property="Background" Value="#DCEAFE"/>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
-    <!-- ===== Gradientes + KPIs (Dashboard) ===== -->
-    <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,0">
-        <GradientStop Color="{StaticResource Sky500}" Offset="0"/>
-        <GradientStop Color="{StaticResource Sky600Color}" Offset="1"/>
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="SuccessGradient" StartPoint="0,0" EndPoint="1,0">
-        <GradientStop Color="{StaticResource Emerald500Color}" Offset="0"/>
-        <GradientStop Color="{StaticResource Emerald600Color}" Offset="1"/>
-    </LinearGradientBrush>
-
-    <Style x:Key="KpiCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
-        <Setter Property="Padding" Value="16"/>
-    </Style>
-
-    <Style x:Key="KpiCardPrimary" TargetType="Border">
-        <Setter Property="CornerRadius" Value="12"/>
-        <Setter Property="Padding" Value="16"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryGradient}"/>
-    </Style>
-
-    <Style x:Key="KpiCardSuccess" TargetType="Border">
-        <Setter Property="CornerRadius" Value="12"/>
-        <Setter Property="Padding" Value="16"/>
-        <Setter Property="Background" Value="{StaticResource SuccessGradient}"/>
-    </Style>
-
-    <Style x:Key="KpiLabel" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}"/>
-    </Style>
-
-    <Style x:Key="KpiValue" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="28"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
-    </Style>
-
-    <Style x:Key="KpiDeltaPositive" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="#059669"/>
-    </Style>
-
-    <Style x:Key="KpiDeltaNegative" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="#DC2626"/>
-    </Style>
-
-    <Style x:Key="KpiOnGradientLabel" TargetType="TextBlock" BasedOn="{StaticResource KpiLabel}">
-        <Setter Property="Foreground" Value="White"/>
-    </Style>
-    <Style x:Key="KpiOnGradientValue" TargetType="TextBlock" BasedOn="{StaticResource KpiValue}">
-        <Setter Property="Foreground" Value="White"/>
-    </Style>
-    <Style x:Key="KpiOnGradientDelta" TargetType="TextBlock" BasedOn="{StaticResource KpiDeltaPositive}">
-        <Setter Property="Foreground" Value="#FFFFFFCC"/>
     </Style>
 
     <!-- ===== InputText (ÚNICO) ===== -->
@@ -236,6 +81,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <!-- ===== ComboBox redondeado (InputCombo) ===== -->
     <Style x:Key="InputCombo" TargetType="ComboBox">
         <Setter Property="Padding" Value="6,4"/>
@@ -331,176 +177,10 @@
         </Setter>
     </Style>
 
-    <!-- ===== Chip/Pill (FilterPill) ===== -->
-    <Style x:Key="FilterPill" TargetType="ToggleButton">
-        <Setter Property="Background" Value="{StaticResource Slate100Brush}"/>
-        <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
-        <Setter Property="Padding" Value="10,6"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ToggleButton">
-                    <Border x:Name="Bd" CornerRadius="999"
-                  Background="{TemplateBinding Background}">
-                        <ContentPresenter Margin="8,2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource PrimaryBrush}"/>
-                            <Setter Property="Foreground" Value="White"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Opacity" Value="0.9"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- ===== Footer/paginación ===== -->
-    <Style x:Key="PaginationButton" TargetType="Button" BasedOn="{StaticResource BtnGhost}">
-        <Setter Property="Padding" Value="8,4"/>
-        <Setter Property="MinWidth" Value="36"/>
-    </Style>
-    <Style x:Key="BtnDestructive" TargetType="Button" BasedOn="{StaticResource BtnPrimary}">
-        <Setter Property="Background" Value="#EF4444"/>
-        <!-- red-500 -->
-    </Style>
-
-    <!-- Icon button “fantasma” (redondeado) -->
-    <Style x:Key="IconButtonGhost" TargetType="Button" BasedOn="{StaticResource BtnGhost}">
-        <Setter Property="Width" Value="32"/>
-        <Setter Property="Height" Value="32"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="0">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    <!-- Título de sección (tarjetas) -->
-    <Style x:Key="SectionTitle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="Foreground" Value="{StaticResource TextStrongBrush}"/>
-    </Style>
-
     <!-- Divisor sutil -->
     <SolidColorBrush x:Key="DividerBrush" Color="#E5E7EB"/>
 
-    <!-- Pill de tendencia (verde/rojo) -->
-    <Style x:Key="TrendPillPositive" TargetType="Border">
-        <Setter Property="CornerRadius" Value="999"/>
-        <Setter Property="Padding" Value="8,2"/>
-        <Setter Property="Background" Value="#ECFDF5"/>
-        <!-- green-50 -->
-        <Setter Property="BorderBrush" Value="#A7F3D0"/>
-        <!-- green-200 -->
-        <Setter Property="BorderThickness" Value="1"/>
-    </Style>
-    <Style x:Key="TrendPillNegative" TargetType="Border">
-        <Setter Property="CornerRadius" Value="999"/>
-        <Setter Property="Padding" Value="8,2"/>
-        <Setter Property="Background" Value="#FEF2F2"/>
-        <!-- red-50 -->
-        <Setter Property="BorderBrush" Value="#FECACA"/>
-        <!-- red-200 -->
-        <Setter Property="BorderThickness" Value="1"/>
-    </Style>
-
-    <!-- Mini etiqueta gris para leyendas -->
-    <Style x:Key="LegendPill" TargetType="Border">
-        <Setter Property="CornerRadius" Value="999"/>
-        <Setter Property="Padding" Value="6,2"/>
-        <Setter Property="Background" Value="{StaticResource Slate100Brush}"/>
-    </Style>
-    <!-- ===== Tarjetas KPI (look shadcn) ===== -->
-    <Style x:Key="StatCard" TargetType="Border" BasedOn="{StaticResource CardStyle}">
-        <Setter Property="CornerRadius" Value="12"/>
-        <Setter Property="Padding" Value="16"/>
-        <Setter Property="Background" Value="#FAFAFF"/>
-    </Style>
-
-    <!-- Variante “éxito” verdosa, muy suave -->
-    <Style x:Key="StatCardSuccess" TargetType="Border" BasedOn="{StaticResource StatCard}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#E8FBEF" Offset="0"/>
-                    <GradientStop Color="#F2FFF7" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush" Value="#D6F5E2"/>
-    </Style>
-
-    <!-- Iconito a la derecha dentro de la tarjeta -->
-    <Style x:Key="KpiIconPill" TargetType="Border">
-        <Setter Property="Background" Value="#EEF2FF"/>
-        <Setter Property="CornerRadius" Value="8"/>
-        <Setter Property="Padding" Value="6"/>
-    </Style>
-
-    <!-- Texto “delta” positivo/advertencia -->
-    <Style x:Key="DeltaPositive" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#16A34A"/>
-        <!-- green-600 -->
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-    </Style>
-    <Style x:Key="DeltaWarn" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#D97706"/>
-        <!-- amber-600 -->
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-    </Style>
-
-    <!-- Item suave (chips grandes) para listas del dashboard -->
-    <Style x:Key="SoftItem" TargetType="Border">
-        <Setter Property="Background" Value="#F8FAFF"/>
-        <Setter Property="CornerRadius" Value="12"/>
-        <Setter Property="Padding" Value="12"/>
-        <Setter Property="BorderBrush" Value="#E5E7F0"/>
-        <Setter Property="BorderThickness" Value="1"/>
-    </Style>
-
-    <!-- Item suave “warning” (para stock bajo) -->
-    <Style x:Key="SoftItemWarn" TargetType="Border" BasedOn="{StaticResource SoftItem}">
-        <Setter Property="Background" Value="#FFFBEB"/>
-        <!-- amber-50 -->
-        <Setter Property="BorderBrush" Value="#FEF3C7"/>
-        <!-- amber-100 -->
-    </Style>
-
-    <!-- Etiqueta de estado a la derecha -->
-    <Style x:Key="StatusRight" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-    </Style>
-    <!-- Tarjeta CTA azul (como en tu captura, derecha) -->
-    <Style x:Key="CtaPrimaryCard" TargetType="Border">
-        <Setter Property="CornerRadius" Value="12"/>
-        <Setter Property="Padding" Value="16"/>
-        <Setter Property="Background">
-            <Setter.Value>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#3B82F6" Offset="0"/>
-                    <GradientStop Color="#2563EB" Offset="1"/>
-                </LinearGradientBrush>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-    </Style>
     <!-- Color de texto sutil (gris) -->
     <SolidColorBrush x:Key="TextSubtleBrush" Color="#6B7280"/>
-
 
 </ResourceDictionary>
