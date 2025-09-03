@@ -1,7 +1,7 @@
 ﻿<Page x:Class="ToxicBizBuddyWPF.Views.OrdersPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components"
+      xmlns:components="clr-namespace:ToxicBizBuddyWPF.Components;assembly=ToxicBizBuddyWPF"
       xmlns:conv="clr-namespace:ToxicBizBuddyWPF.Converters;assembly=ToxicBizBuddyWPF"
       Title="Gestión de Pedidos">
 
