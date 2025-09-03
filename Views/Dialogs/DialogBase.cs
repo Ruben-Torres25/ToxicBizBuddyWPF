@@ -21,22 +21,6 @@ namespace ToxicBizBuddyWPF.Views.Dialogs
             ShowInTaskbar = false;
             Topmost = true;
 
-            _root = new Grid { Background = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)) };
-
-            var border = new Border
-            {
-                Style = (Style)Application.Current.FindResource("CardStyle"),
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
-            };
-            border.SetBinding(Border.WidthProperty, new Binding(nameof(CardWidth)) { Source = this });
-
-            var stack = new StackPanel();
-
-            var header = new Grid { Margin = new Thickness(0, 0, 0, 12) };
-            header.ColumnDefinitions.Add(new ColumnDefinition());
-            header.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-
             var title = new TextBlock
             {
                 Style = (Style)Application.Current.FindResource("H1"),
@@ -59,16 +43,46 @@ namespace ToxicBizBuddyWPF.Views.Dialogs
             closeBtn.Click += Close_Click;
             Grid.SetColumn(closeBtn, 1);
 
-            header.Children.Add(title);
-            header.Children.Add(closeBtn);
-
             _contentPresenter = new ContentPresenter();
 
-            stack.Children.Add(header);
-            stack.Children.Add(_contentPresenter);
+            var header = new Grid
+            {
+                Margin = new Thickness(0, 0, 0, 12),
+                ColumnDefinitions =
+                {
+                    new ColumnDefinition(),
+                    new ColumnDefinition { Width = GridLength.Auto }
+                },
+                Children =
+                {
+                    title,
+                    closeBtn
+                }
+            };
 
-            border.Child = stack;
-            _root.Children.Add(border);
+            var stack = new StackPanel
+            {
+                Children =
+                {
+                    header,
+                    _contentPresenter
+                }
+            };
+
+            var border = new Border
+            {
+                Style = (Style)Application.Current.FindResource("CardStyle"),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                Child = stack
+            };
+            border.SetBinding(Border.WidthProperty, new Binding(nameof(CardWidth)) { Source = this });
+
+            _root = new Grid
+            {
+                Background = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)),
+                Children = { border }
+            };
             base.Content = _root;
         }
 
