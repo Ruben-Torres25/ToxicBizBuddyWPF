@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -82,18 +81,18 @@ namespace ToxicBizBuddyWPF.Views
     {
         public string Pedido { get; }
         public string Cliente { get; }
-        public string Fecha { get; }
-        public string Items { get; }
-        public string Total { get; }
+        public DateTime Fecha { get; }
+        public int Items { get; }
+        public decimal Total { get; }
         public string Estado { get; }
 
         public OrderRow(string pedido, string cliente, DateTime fecha, int items, decimal total, string estado)
         {
             Pedido = pedido;
             Cliente = cliente;
-            Fecha = fecha.ToString("yyyy-MM-dd");
-            Items = items == 1 ? "1 item" : $"{items} items";
-            Total = total.ToString("$0.00", CultureInfo.InvariantCulture);
+            Fecha = fecha;
+            Items = items;
+            Total = total;
             Estado = estado; // "Completado" | "Pendiente" | "Cancelado"
         }
     }
