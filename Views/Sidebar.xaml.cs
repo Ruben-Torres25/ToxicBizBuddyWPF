@@ -13,55 +13,21 @@ namespace ToxicBizBuddyWPF.Views
         }
 
         // Navegación: llamamos al método público del MainWindow
-        private void Dashboard_Click(object sender, RoutedEventArgs e)
+        private void Menu_Click(object sender, RoutedEventArgs e)
         {
-            SetActive((Button)sender);
-            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Dashboard");
-        }
-
-        private void Orders_Click(object sender, RoutedEventArgs e)
-        {
-            SetActive((Button)sender);
-            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Orders");
-        }
-
-        private void Clients_Click(object sender, RoutedEventArgs e)
-        {
-            SetActive((Button)sender);
-            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Clients");
-        }
-
-        private void Products_Click(object sender, RoutedEventArgs e)
-        {
-            SetActive((Button)sender);
-            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Products");
-        }
-
-        private void Providers_Click(object sender, RoutedEventArgs e)
-        {
-            SetActive((Button)sender);
-            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Providers");
-        }
-
-        private void Cash_Click(object sender, RoutedEventArgs e)
-        {
-            SetActive((Button)sender);
-            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Cash");
-        }
-
-        private void Reports_Click(object sender, RoutedEventArgs e)
-        {
-            SetActive((Button)sender);
-            (Application.Current.MainWindow as MainWindow)?.NavigateTo("Reports");
+            var button = (Button)sender;
+            var route = button.Tag as string;
+            (Application.Current.MainWindow as MainWindow)?.NavigateTo(route);
+            SetActive(button);
         }
 
         // Visual activo
         private void SetActive(Button activeButton)
         {
             foreach (var btn in MenuStack.Children.OfType<Button>())
-                btn.Tag = null;
+                btn.Uid = null;
 
-            activeButton.Tag = "active";
+            activeButton.Uid = "active";
         }
     }
 }
