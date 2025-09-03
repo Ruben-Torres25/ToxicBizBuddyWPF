@@ -7,10 +7,17 @@ namespace ToxicBizBuddyWPF.Components
     {
         public PrimaryButton() => InitializeComponent();
 
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register(
+                nameof(Text),
+                typeof(string),
+                typeof(PrimaryButton),
+                new PropertyMetadata(string.Empty));
+
         public string Text
         {
-            get => (string)((ContentPresenter)InnerButton.Content).Content;
-            set => ((ContentPresenter)InnerButton.Content).Content = value;
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
 
         public event RoutedEventHandler Click
